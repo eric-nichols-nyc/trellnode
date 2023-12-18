@@ -7,7 +7,7 @@ import { AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import { connectToDatabase } from "@/lib/db";
-import { User } from "next-auth";
+
 const authOptions:AuthOptions = {
     providers: [
         GoogleProvider({
