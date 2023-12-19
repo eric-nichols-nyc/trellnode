@@ -1,7 +1,13 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export const Logo = () => {
   return (
-    <div>Logo</div>
+    <div>
+        <Link href="/">
+            <Image src="/logo.svg" alt="logo" width={78} height={32} />
+        </Link>
+    </div>
   )
 }
