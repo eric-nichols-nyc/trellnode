@@ -6,7 +6,7 @@ export const Logo = () => {
   return (
     <div>
         <Link href="/">
-            <Image src="/logo.svg" alt="logo" width={78} height={32} />
+            <Image src="/images/logo.svg" alt="logo" width={78} height={32} />
         </Link>
     </div>
   )

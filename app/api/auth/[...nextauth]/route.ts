@@ -1,6 +1,3 @@
-/**
- * Create auth options
- */
 
 import { prisma } from "@/prisma";
 import { AuthOptions } from "next-auth";
