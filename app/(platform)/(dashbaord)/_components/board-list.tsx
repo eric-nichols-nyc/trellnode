@@ -10,7 +10,7 @@ export const BoardList = ({ addBoard, boards }: BoardListProps) => {
   console.log("boards", boards);
   return (
     <div className="w-9/12">
-      <div className="w-full grid grid-cols-3 gap-4 border">
+      <div className="w-full grid grid-cols-3 gap-4">
         {boards.map((board: any) => (
           <Link href={`/boards/${board.id}`} key={board.id}
             role="button"
