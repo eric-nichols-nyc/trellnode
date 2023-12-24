@@ -17,3 +17,19 @@ model User{
   image String?
   hashedPassword String?
 }
+
+model Board {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  imageId       String
+  imageThumbUrl String
+  imageFullUrl  String
+  imageUserName String
+  imageLinkHTML String
+  userId        String @db.ObjectId
+
+  // lists         List[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
