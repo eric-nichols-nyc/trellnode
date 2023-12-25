@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-25T19:51:31.215Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="-xAzLL7am49C_ba0so3Z" version="22.1.11" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-12-25T19:52:17.248Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="ruwlL1sumEIIMaAoSahu" version="22.1.11" type="github" pages="3">
   <diagram name="Intro Page" id="4obYDU1OZgabSgTtTAq6">
     <mxGraphModel dx="1500" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -79,7 +79,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-18" value="Form" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="1360" y="460" width="205" height="130" as="geometry" />
+          <mxGeometry x="1360" y="460" width="205" height="90" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-20" value="server component gets list of boards" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="300" y="140" width="550" height="400" as="geometry" />
@@ -136,10 +136,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-45" value="zod validation" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1402.5" y="640" width="120" height="60" as="geometry" />
+          <mxGeometry x="1402.5" y="600" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-47" value="create board" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1402.5" y="780" width="120" height="60" as="geometry" />
+          <mxGeometry x="1402.5" y="710" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-50" value="Logo" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="20" y="64" width="90" height="30" as="geometry" />
