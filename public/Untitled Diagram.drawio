@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-25T03:36:01.289Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="R0YRSoYaZl38IpzkFIJA" version="22.1.11" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-12-25T03:39:04.118Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="y6rpyPl6Wxo-kV9GBCzn" version="22.1.11" type="github" pages="3">
   <diagram name="Intro Page" id="4obYDU1OZgabSgTtTAq6">
     <mxGraphModel dx="1500" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -42,7 +42,7 @@
         <mxCell id="mlJpsFkZQ3nTdwVBuxjQ-3" value="sidenav" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="10" y="114" width="260" height="660" as="geometry" />
         </mxCell>
-        <mxCell id="mlJpsFkZQ3nTdwVBuxjQ-4" value="boardsList" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="mlJpsFkZQ3nTdwVBuxjQ-4" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="280" y="114" width="600" height="660" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -74,6 +74,18 @@
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-18" value="Form" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="1360" y="460" width="205" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-20" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="140" width="550" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-21" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="180" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-22" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="180" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-23" value="Create new board" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="180" width="150" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
