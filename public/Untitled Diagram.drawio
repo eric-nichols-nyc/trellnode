@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-25T19:49:38.054Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="mm9RhXZyM-T9dCffzgXw" version="22.1.11" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-12-25T19:51:31.215Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="-xAzLL7am49C_ba0so3Z" version="22.1.11" type="github" pages="3">
   <diagram name="Intro Page" id="4obYDU1OZgabSgTtTAq6">
     <mxGraphModel dx="1500" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -87,6 +87,9 @@
         <mxCell id="4tYexLwtktYzb2lu8H3o-21" value="Tile" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="330" y="180" width="150" height="70" as="geometry" />
         </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="4tYexLwtktYzb2lu8H3o-22" target="4tYexLwtktYzb2lu8H3o-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-22" value="Tile" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="500" y="180" width="150" height="70" as="geometry" />
         </mxCell>
@@ -143,6 +146,24 @@
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-51" value="Logout" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="780" y="64" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-52" value="BoardTile" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="472.5" y="860" width="205" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-54" value="Links to board detail page" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="690" y="890" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-55" value="Board link" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="130" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-56" value="Board link" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="180" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-57" value="Board link" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="230" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4tYexLwtktYzb2lu8H3o-58" value="Board link" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="280" width="220" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
