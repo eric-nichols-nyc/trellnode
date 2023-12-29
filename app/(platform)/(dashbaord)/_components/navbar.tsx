@@ -7,7 +7,6 @@ import React from 'react'
 export const Navbar = () => {
   const session = useSession();
 
-  console.log('navbar session = ',session);
   return (
     <div className="fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex items-center">
     <div className="flex w-full justify-between">

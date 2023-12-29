@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import {connectToDatabase} from "@/lib/db";
 import { prisma } from "@/prisma";
 import { BoardList } from "../_components/board-list";
-import { User } from "@prisma/client";
+import { User, Board} from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
 export const revalidate = true;
@@ -14,10 +14,10 @@ const Boardspage = async() => {
   if (!session) {
     redirect("/");
   }
-  console.log("page session", session);
 
   let user: User | null = null;
-  let boards = null;
+  let boards:Board[] | null = null;
+
   try{
     await connectToDatabase();
     user = await prisma.user.findUnique({
@@ -25,9 +25,6 @@ const Boardspage = async() => {
         email: session?.user?.email!,
       },
     });
-
-    console.log("user", user);
-
   }catch(e){
     console.log(e);
   }
@@ -39,19 +36,19 @@ const Boardspage = async() => {
         userId: user?.id!,
       },
     });
-    console.log("boards", boards);
   }catch(e){
     console.log(e);
   }
 
-  const addBoard = async() => {
+  const addBoard = async(title:any | null) => {
     "use server"
    if(!user) return;
+   console.log(title)
     try{
       await connectToDatabase();
       const board = await prisma.board.create({
         data: {
-          title: "New Board",
+          title: title,
           imageId: "GGDuawxHUwo",
           imageThumbUrl: "https://images.unsplash.com/photo-1629221892514-7abb71a803f7?crop=entropy%5Cu0026cs=tinysrgb%5Cu0026fit=max%5Cu0026fm=jpg%5Cu0026ixid=M3w1MjY4NzN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTk2OTcyNDN8%5Cu0026ixlib=rb-4.0.3%5Cu0026q=80%5Cu0026w=200",
           imageFullUrl:"https://images.unsplash.com/photo-1629221892514-7abb71a803f7?crop=entropy%5Cu0026cs=srgb%5Cu0026fm=jpg%5Cu0026ixid=M3w1MjY4NzN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTk2OTcyNDN8%5Cu0026ixlib=rb-4.0.3%5Cu0026q=85",
@@ -60,10 +57,11 @@ const Boardspage = async() => {
           userId: user.id,
           }
       });
-      redirect(`/boards/${board.id}`);
-      console.log("board", board);
+      console.log('Successfully created board', board)
+      return board
     }catch(e){
-      console.log(e);
+      console.log("There was an error...", e);
+      return {messsage: 'There was an error creating the board'}
     }
   }
 

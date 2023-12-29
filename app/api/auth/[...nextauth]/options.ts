@@ -15,6 +15,7 @@ export const options:AuthOptions = {
     session: { strategy: 'jwt' },
     callbacks: {
         async signIn({user, account, profile}) {
+            console.log('sign in called...')
             try{
                 await connectToDatabase();
                 const existinguser = await prisma.user.findUnique({
