@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-29T21:49:56.410Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="vGXJ111ZTzXatjQ53nBU" version="22.1.15" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2023-12-29T22:56:14.216Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="Q7hFZKC5O0xVgaKNd9vE" version="22.1.15" type="github" pages="4">
   <diagram id="VjUphf2xe8MmDeri_Qx1" name="Page-3">
     <mxGraphModel dx="2086" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -79,7 +79,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="qONytkZGr1prFvAMcIFx" name="Boards Page">
-    <mxGraphModel dx="1238" dy="1073" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="822" dy="513" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -127,11 +127,6 @@
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="4tYexLwtktYzb2lu8H3o-18" target="4tYexLwtktYzb2lu8H3o-45" edge="1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pE3mwXXlcw6T97mOHkot-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="4tYexLwtktYzb2lu8H3o-18">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1560" y="590" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="poWblqqnWuVsuYNhMpzD-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="4tYexLwtktYzb2lu8H3o-18">
           <mxGeometry relative="1" as="geometry">
@@ -225,11 +220,16 @@
         <mxCell id="4tYexLwtktYzb2lu8H3o-58" value="Board link" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="30" y="280" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="pE3mwXXlcw6T97mOHkot-1" value="title&lt;br&gt;imageId&lt;br&gt;imageHtumbUrl&lt;br&gt;imageuserName&lt;br&gt;ImageLinkHTML&lt;br&gt;userId" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1550" y="590" width="110" height="100" as="geometry" />
+        <mxCell id="poWblqqnWuVsuYNhMpzD-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="pE3mwXXlcw6T97mOHkot-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1910" y="504" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="poWblqqnWuVsuYNhMpzD-2" value="1. send form data to action&lt;br&gt;2. validate data server side&lt;br&gt;3. ssnd errors to client if invalid&lt;br&gt;4. else add data to db&amp;nbsp; send id to client" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1730" y="470" width="230" height="70" as="geometry" />
+        <mxCell id="pE3mwXXlcw6T97mOHkot-1" value="title&lt;br&gt;imageId&lt;br&gt;imageHtumbUrl&lt;br&gt;imageuserName&lt;br&gt;ImageLinkHTML&lt;br&gt;userId" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1722" y="454" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-2" value="1. send form data to action&lt;br&gt;2. validate data server side&lt;br&gt;3. send errors to client if invalid&lt;br&gt;4. else add data to db&amp;nbsp; send id to client" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1920" y="469" width="230" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
