@@ -14,14 +14,15 @@ import { UnsplashImageList } from "./unsplash-image-list";
 import { useRouter } from "next/navigation";
 import { createBoard } from "@/actions/create-board-action";
 import { Board } from "@prisma/client";
+import { useState } from "react";
 
 type BoardListProps = {
-  // addBoard: (title:FormDataEntryValue | null) => void;
   boards: any;
 };
 
 export const BoardList = ({ boards }: BoardListProps) => {
   const router = useRouter();
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   async function handleAddBoard(e: any) {
     e.preventDefault();
@@ -35,8 +36,8 @@ export const BoardList = ({ boards }: BoardListProps) => {
     const result = (await createBoard(obj)) as any;
     if (result.id) {
       // router.push(`/boards/${result.id}`)
-    } else {
-      alert("Something went wrong");
+    } else if (result.errors) {
+      setFieldErrors(result.errors);
     }
   }
   return (
@@ -75,7 +76,7 @@ export const BoardList = ({ boards }: BoardListProps) => {
                     width={186}
                     height={100}
                   />
-                  <UnsplashImageList id="image"/>
+                  <UnsplashImageList id="image" errors={fieldErrors}/>
                 </div>
                 <div className="flex flex-col gap-2">
                   <Label htmlFor="width">Board Title</Label>
@@ -86,7 +87,14 @@ export const BoardList = ({ boards }: BoardListProps) => {
                     👋
                   </span>
                   <p>Board title is required</p>
-                </div>
+                  </div>
+                  <div>
+                    {
+                      fieldErrors.title?.map((error: string) => (
+                        <p className="text-red-500">{error}</p>
+                      ))
+                    }
+                  </div>
                 <Button type="submit" className="w-full">
                   Create
                 </Button>

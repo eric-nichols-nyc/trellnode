@@ -44,6 +44,17 @@ export async function createBoard({title, image}:any) {
         throw new Error("Unable to connect to database");
     }
 
+    // validate input
+    const validationResult = CreateBoard.safeParse({
+        title,
+        image,
+    });
+
+    console.log('isValid ', validationResult);
+    if(!validationResult.success){
+        return {errors: validationResult.error.flatten().fieldErrors};
+    }
+  
     const [
         imageId,
         imageThumbUrl,
