@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-29T22:56:14.216Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="Q7hFZKC5O0xVgaKNd9vE" version="22.1.15" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2023-12-29T23:41:25.189Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="uUzD-XhZ6GTwsfX8Ps9t" version="22.1.15" type="github" pages="4">
   <diagram id="VjUphf2xe8MmDeri_Qx1" name="Page-3">
     <mxGraphModel dx="2086" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -79,7 +79,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="qONytkZGr1prFvAMcIFx" name="Boards Page">
-    <mxGraphModel dx="822" dy="513" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1046" dy="529" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -137,22 +137,22 @@
           <mxGeometry x="1360" y="460" width="205" height="90" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-20" value="server component gets list of boards" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="300" y="140" width="550" height="400" as="geometry" />
+          <mxGeometry x="305" y="220" width="550" height="400" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-21" value="Tile" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="330" y="180" width="150" height="70" as="geometry" />
+          <mxGeometry x="330" y="254" width="150" height="70" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="4tYexLwtktYzb2lu8H3o-22" target="4tYexLwtktYzb2lu8H3o-52" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-22" value="Tile" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="500" y="180" width="150" height="70" as="geometry" />
+          <mxGeometry x="500" y="254" width="150" height="70" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="4tYexLwtktYzb2lu8H3o-23" target="4tYexLwtktYzb2lu8H3o-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-23" value="Create new board" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="670" y="180" width="150" height="70" as="geometry" />
+          <mxGeometry x="670" y="254" width="150" height="70" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-27" value="unsplash Api" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1730" y="340" width="120" height="60" as="geometry" />
@@ -230,6 +230,12 @@
         </mxCell>
         <mxCell id="poWblqqnWuVsuYNhMpzD-2" value="1. send form data to action&lt;br&gt;2. validate data server side&lt;br&gt;3. send errors to client if invalid&lt;br&gt;4. else add data to db&amp;nbsp; send id to client" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="1920" y="469" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-4" value="Trellnode Workspace" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="304" y="140" width="555" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-5" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="460" y="152.5" width="45" height="45" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
