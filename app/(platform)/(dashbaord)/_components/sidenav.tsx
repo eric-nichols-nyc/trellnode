@@ -8,7 +8,7 @@ export const Sidenav = () => {
   const isMobile = false;
   return (
     <>
-      <aside className="group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] p-2">
+      <aside className="group/sidebar h-full bg-secondary overflow-y-auto relative flex w-80 flex-col z-[99999] p-2">
         <div
           role="button"
           className={cn(

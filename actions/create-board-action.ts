@@ -50,7 +50,6 @@ export async function createBoard({title, image}:any) {
         image,
     });
 
-    console.log('isValid ', validationResult);
     if(!validationResult.success){
         return {errors: validationResult.error.flatten().fieldErrors};
     }
@@ -86,7 +85,6 @@ export async function createBoard({title, image}:any) {
         revalidatePath('/boards');
         return board;
     } catch (error) {
-        console.log(error);
         return {message: 'Unable to create boare'};
     }
 }

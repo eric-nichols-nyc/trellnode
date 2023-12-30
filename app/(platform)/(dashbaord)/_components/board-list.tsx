@@ -44,7 +44,7 @@ export const BoardList = ({ boards }: BoardListProps) => {
     }
   }
   return (
-    <div className="w-9/12">
+    <div className="w-full">
       <div className="font-semibold mb-2">Your Boards</div>
       <div className="w-full grid grid-cols-4 gap-4">
 
