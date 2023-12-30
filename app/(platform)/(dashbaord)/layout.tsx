@@ -11,9 +11,9 @@ export default function DashBoardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-full w-full">
+    <div className="h-screen w-full">
       <Navbar />
-      <div className="pt-14 flex">
+      <div className="pt-14 flex h-full">
         <Sidenav />
         <div className="w-full">
           <main className="pt-20 md:pt-12 px-4 max-w-6xl 2xl:max-w-screen-xl mx-auto">

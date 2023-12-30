@@ -1,12 +1,13 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 import { connectToDatabase } from "@/lib/db";
+import Image from "next/image";
+import { User, getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
-import { BoardList } from "../_components/board-list";
-import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
-const Boardspage = async () => {
+export const BoardListNav = async () => {
   const session = await getServerSession(options);
   if (!session) {
     redirect("/");
@@ -35,15 +36,23 @@ const Boardspage = async () => {
   } catch (e) {
     console.log(e);
   }
-
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-center w-9/12 font-semibold">
-        <div>Trellnode workspace</div>
-      </div>
-      <BoardList boards={boards} />
+    <div>
+      {boards?.map((board: any) => (
+        <Link
+          key={board.id}
+          href="#"
+          className="group flex gap-2 relative h-full w-full border"
+        >
+          <Image
+            alt="placeholder image"
+            src={board.imageThumbUrl}
+            height={20}
+            width={20}
+          />
+          <span>{board.title}</span>
+        </Link>
+      ))}
     </div>
   );
 };
-
-export default Boardspage;
