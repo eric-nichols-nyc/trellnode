@@ -1,11 +1,12 @@
-import Link from "next/link";
 import { connectToDatabase } from "@/lib/db";
-import Image from "next/image";
 import { User, getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import ListItem from "./list-item";
+
+
 
 export const BoardListNav = async () => {
   const session = await getServerSession(options);
@@ -38,20 +39,8 @@ export const BoardListNav = async () => {
   }
   return (
     <div>
-      {boards?.map((board: any) => (
-        <Link
-          key={board.id}
-          href="#"
-          className="group flex gap-2 relative h-full w-full border"
-        >
-          <Image
-            alt="placeholder image"
-            src={board.imageThumbUrl}
-            height={20}
-            width={20}
-          />
-          <span>{board.title}</span>
-        </Link>
+      {boards?.map((board: Board) => (
+        <ListItem key={board.id} board={board} />
       ))}
     </div>
   );
