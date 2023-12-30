@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-30T19:06:17.556Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="9a3Er-12MHRzslTsdLm7" version="22.1.15" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2023-12-30T23:00:41.113Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="ke1s0W32Db6lJ1x3l4Ca" version="22.1.15" type="github" pages="4">
   <diagram id="VjUphf2xe8MmDeri_Qx1" name="Page-3">
     <mxGraphModel dx="2086" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -79,7 +79,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="qONytkZGr1prFvAMcIFx" name="Boards Page">
-    <mxGraphModel dx="1968" dy="967" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2143" dy="1017" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -278,17 +278,32 @@
         <mxCell id="poWblqqnWuVsuYNhMpzD-18" value="" style="line;strokeWidth=2;html=1;" vertex="1" parent="1">
           <mxGeometry x="220" y="409" width="20" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="poWblqqnWuVsuYNhMpzD-20" value="Connect listLinks to create board" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="-260" y="288" width="200" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="poWblqqnWuVsuYNhMpzD-21" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="25" y="233" width="232" height="232" as="geometry" />
         </mxCell>
         <mxCell id="poWblqqnWuVsuYNhMpzD-22" value="&lt;div style=&quot;color: rgb(204, 204, 204); background-color: rgb(31, 31, 31); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px;&quot;&gt;BoardListNav&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="-140" y="244" width="110" height="30" as="geometry" />
+          <mxGeometry x="-160" y="104" width="110" height="30" as="geometry" />
         </mxCell>
         <mxCell id="poWblqqnWuVsuYNhMpzD-24" value="DeleteBoardAction" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="160" y="1078" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-25" value="Sidenav(s)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-220" y="190" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-26" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-149" y="206" as="sourcePoint" />
+            <mxPoint x="11" y="206" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-27" value="BoardListNav(s)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="234" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-28" value="" style="line;strokeWidth=1;rotatable=0;dashed=0;labelPosition=right;align=left;verticalAlign=middle;spacingTop=0;spacingLeft=6;points=[];portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="-35" y="244" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="poWblqqnWuVsuYNhMpzD-29" value="CollapsibleNav(c)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="212" width="120" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
