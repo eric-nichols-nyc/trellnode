@@ -46,7 +46,7 @@ export const BoardList = ({ boards }: BoardListProps) => {
   return (
     <div className="w-full">
       <div className="font-semibold mb-2">Your Boards</div>
-      <div className="w-full grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
 
         {boards.map((board: any) => (
           <Link
