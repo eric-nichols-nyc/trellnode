@@ -3,14 +3,16 @@
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "usehooks-ts";
 
 type CollapsibleProps = {
   children: React.ReactNode;
 };
 export const CollapsibleNav = ({ children }: CollapsibleProps) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const isMobile = false;
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isCollapsed, setIsCollapsed] = useState(isMobile);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
+
   function collapseSidebar() {
     if (!sidebarRef.current) return;
     setIsCollapsed(true);
@@ -44,7 +46,13 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
         </div>
         <div>{children}</div>
       </aside>
-    {isCollapsed && <MenuIcon onClick={openSidebar} role="button" className="h-6 w-6 text-muted-foreground" />}
+      {isMobile && (
+        <MenuIcon
+          onClick={openSidebar}
+          role="button"
+          className="h-6 w-6 text-muted-foreground"
+        />
+      )}
     </>
   );
 };
