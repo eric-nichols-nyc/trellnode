@@ -3,13 +3,16 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useFormStatus } from "react-dom";
 
 type UnsplashImageListProps = {
   id: string;
   errors?: Record<string, string[] | undefined>;
 };
 
-export const UnsplashImageList = () => {
+export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
+  const { pending } = useFormStatus();
+
   // assign the image list to a variable
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -53,26 +56,42 @@ export const UnsplashImageList = () => {
     <div className="relative">
       <div className="grid grid-cols-3 gap-2 mb-2">
         {images.map((image) => (
-          <div
-            key={image.id}
-            className="cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted"
-            role="button"
-            onClick={() => setSelectedImageId(image.id)}
-          >
-            <Image
-              src={image.urls.thumb}
-              alt={image.alt_description}
-              className="object-cover"
-              fill
-            />
-            <Link
-              href={image.links.html}
-              target="_blank"
-              className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover:underline p-1 bg-black/50"
+          <>
+            <div
+              key={image.id}
+              className="cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted"
+              role="button"
+              onClick={() => setSelectedImageId(image.id)}
             >
-              {image.user.name}
-            </Link>
-          </div>
+              <input
+                type="radio"
+                id={id}
+                name={id}
+                className="hidden"
+                checked={selectedImageId === image.id}
+                disabled={pending}
+                value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
+              />
+              <Image
+                src={image.urls.thumb}
+                alt={image.alt_description}
+                className="object-cover"
+                fill
+              />
+              <Link
+                href={image.links.html}
+                target="_blank"
+                className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover:underline p-1 bg-black/50"
+              >
+                {image.user.name}
+              </Link>
+            </div>
+          </>
+        ))}
+      </div>
+      <div>
+        {errors?.image?.map((error: string) => (
+          <p className="text-red-500">{error}</p>
         ))}
       </div>
     </div>

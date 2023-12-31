@@ -7,7 +7,7 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <div className="h-full bg-slate-100">
+      <div className="h-full border">
         <Navbar />
         <main>{children}</main>
       </div>
