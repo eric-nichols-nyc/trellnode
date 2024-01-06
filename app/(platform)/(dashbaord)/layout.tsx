@@ -15,11 +15,9 @@ export default function DashBoardLayout({
       <Navbar />
       <div className="pt-14 flex h-full">
         <Sidenav />
-        <div className="w-full">
-          <main className="pt-20 md:pt-12 px-4 max-w-6xl 2xl:max-w-screen-xl mx-auto">
+        <main className="flex-1 h-full overflow-y-auto">
             {children}
           </main>
-        </div>
       </div>
     </div>
   );

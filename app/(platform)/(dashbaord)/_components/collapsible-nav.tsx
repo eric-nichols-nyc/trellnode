@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -12,6 +11,15 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
+  const MOBILE_W = '260px'
+  // nav is 100% width on mobile devices
+  useEffect(() => {
+    if(isMobile){
+      console.log(true)
+    }else{
+      console.log(false)
+    }
+  },[isMobile])
 
   function collapseSidebar() {
     if (!sidebarRef.current) return;
@@ -20,9 +28,11 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   }
 
   function openSidebar() {
+    console.log('openSidebar', isMobile)
     if (!sidebarRef.current) return;
     setIsCollapsed(false);
-    sidebarRef.current.style.width = "260px";
+    // if isMobile open to full width
+    sidebarRef.current.style.width = isMobile ? "100vw" : MOBILE_W;
   }
 
   return (
@@ -46,7 +56,7 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
         </div>
         <div>{children}</div>
       </aside>
-      {isMobile && (
+      {isCollapsed && (
         <MenuIcon
           onClick={openSidebar}
           role="button"

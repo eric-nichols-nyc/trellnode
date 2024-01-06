@@ -50,7 +50,7 @@ const ListItem = ({ board }: ListItemProps) => {
           <PopoverTrigger asChild>
             <MoreHorizontal />
           </PopoverTrigger>
-          <PopoverContent className="flex flex-col w-[300px]" side="right">
+          <PopoverContent className="flex flex-col w-[260px]" side="right">
             <PopoverClose ref={closeRef} asChild>
               <Button
                 className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
