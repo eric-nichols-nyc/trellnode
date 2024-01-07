@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-01-06T17:42:03.945Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="LuSQ1uIme3cDVrFt7AlY" version="22.1.16" type="github" pages="4">
-  <diagram id="VjUphf2xe8MmDeri_Qx1" name="Page-3">
-    <mxGraphModel dx="789" dy="1025" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2024-01-07T03:40:50.879Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="MFLXLZftIxkPpbCKSfrL" version="22.1.16" type="github" pages="5">
+  <diagram id="VjUphf2xe8MmDeri_Qx1" name="models">
+    <mxGraphModel dx="946" dy="847" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -50,7 +50,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Intro Page" id="4obYDU1OZgabSgTtTAq6">
-    <mxGraphModel dx="2086" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="946" dy="847" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -79,7 +79,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="qONytkZGr1prFvAMcIFx" name="Boards Page">
-    <mxGraphModel dx="3045" dy="1026" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1741" dy="631" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -199,7 +199,7 @@
         <mxCell id="4tYexLwtktYzb2lu8H3o-50" value="Logo" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="20" y="64" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="4tYexLwtktYzb2lu8H3o-51" value="Logout" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="4tYexLwtktYzb2lu8H3o-51" value="userMenu" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="780" y="64" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="4tYexLwtktYzb2lu8H3o-52" value="BoardTile" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
@@ -383,6 +383,14 @@
         <mxCell id="g3Sz2q69Y8sB4uVWJprt-7" value="Add another List" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="810" y="210" width="250" height="40" as="geometry" />
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="H6mocDyHvk6u7A8m1sKO" name="actions">
+    <mxGraphModel dx="946" dy="847" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
