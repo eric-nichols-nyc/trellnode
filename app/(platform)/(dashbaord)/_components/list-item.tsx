@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ElementRef, useRef } from "react";
 import { deleteBoard } from "@/actions/delete-board-action";
+import { BoardTitleForm } from "./board-title-form";
 
 type ListItemProps = {
   board: Board;
@@ -22,7 +23,6 @@ const ListItem = ({ board }: ListItemProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
 
   async function handleDelete() {
-    console.log("delete", board.id);
     try{
         await deleteBoard(board.id);
         alert("Board deleted");
@@ -42,9 +42,9 @@ const ListItem = ({ board }: ListItemProps) => {
             alt="placeholder image"
             src={board.imageThumbUrl}
             height={20}
-            width={20}
+            width={30}
           />
-          <span>{board.title}</span>
+          <BoardTitleForm title={board.title} id={board.id} />
         </div>
         <Popover>
           <PopoverTrigger asChild>

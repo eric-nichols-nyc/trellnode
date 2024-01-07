@@ -10,6 +10,7 @@ type CollapsibleProps = {
 export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const [isResetting, setIsResetting] = useState(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const MOBILE_W = '260px'
   // nav is 100% width on mobile devices
@@ -41,7 +42,8 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
         ref={sidebarRef}
         className={cn(
           "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-[260px] flex-col z-[99999]",
-          isMobile && "w-0"
+          isMobile && "w-0",
+          isResetting && "transition-all ease-in-out duration-300",
         )}
       >
         <div
