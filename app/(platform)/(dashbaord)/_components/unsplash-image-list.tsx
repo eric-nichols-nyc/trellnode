@@ -7,10 +7,11 @@ import { useFormStatus } from "react-dom";
 
 type UnsplashImageListProps = {
   id: string;
+  fetchedImgSrc: (src: string) => void;
   errors?: Record<string, string[] | undefined>;
 };
 
-export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
+export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageListProps) => {
   const { pending } = useFormStatus();
 
   // assign the image list to a variable
@@ -28,6 +29,7 @@ export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
         if (response && response.response) {
           console.log(response.response);
           const gallery = response.response as Array<Record<string, any>>;
+          fetchedImgSrc(gallery[0].urls.thumb);
           setImages(gallery);
         } else {
           console.error("No response from Unsplash");
@@ -43,6 +45,12 @@ export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
 
     getImages();
   }, []);
+
+  function setBgImages(id:string, thumb:string){
+    console.log('setBgImage')
+    setSelectedImageId(id)
+    fetchedImgSrc(thumb)
+  }
 
   if (loading) {
     return (
@@ -61,7 +69,7 @@ export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
               key={image.id}
               className="cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted"
               role="button"
-              onClick={() => setSelectedImageId(image.id)}
+              onClick={() => setBgImages(image.id, image.urls.thumb)}
             >
               <input
                 type="radio"

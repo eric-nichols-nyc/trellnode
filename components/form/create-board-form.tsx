@@ -12,7 +12,7 @@ type CreateBoardFormProps = {
 
 export const CreateBoardForm = ({close}:CreateBoardFormProps) => {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
-  const fetchedImgSrc = "https://images.unsplash.com/photo-1507783548227-544c3b8fc065?crop=entropy\u0026cs=tinysrgb\u0026fit=max\u0026fm=jpg\u0026ixid=M3w1MjY4NzN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTk2OTcyNDN8\u0026ixlib=rb-4.0.3\u0026q=80\u0026w=200";
+  const [fetchedImgSrc, setFetchedImgSrc] = useState<string>("");
 
   async function handleAddBoard(e: any) {
     e.preventDefault();
@@ -48,7 +48,7 @@ export const CreateBoardForm = ({close}:CreateBoardFormProps) => {
             height={96}
           />
         </div>
-        <UnsplashImageList id="image" errors={fieldErrors} />
+        <UnsplashImageList id="image" errors={fieldErrors} fetchedImgSrc={setFetchedImgSrc}/>
         <div className="flex flex-col gap-2">
           <Label htmlFor="width">Board Title</Label>
           <Input id="width" className="col-span-2 h-8" name="title" />
