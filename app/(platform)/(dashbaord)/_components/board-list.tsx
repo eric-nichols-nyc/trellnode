@@ -17,6 +17,7 @@ import { createBoard } from "@/actions/create-board-action";
 import { Board } from "@prisma/client";
 import { ElementRef, useRef, useState } from "react";
 import { X } from "lucide-react";
+import { FormPopover } from "@/components/form/form-popover";
 
 type BoardListProps = {
   boards: any;
@@ -47,7 +48,14 @@ export const BoardList = ({ boards }: BoardListProps) => {
     <div className="w-full max-w-4xl margin m-auto">
       <div className="font-semibold mb-2">Your Boards</div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-
+        <FormPopover>
+          <div
+            role="button"
+            className="border aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
+          >
+            <p className="text-sm">Create new board</p>
+          </div>
+        </FormPopover>
         {boards.map((board: any) => (
           <Link
             key={board.id}
@@ -59,61 +67,6 @@ export const BoardList = ({ boards }: BoardListProps) => {
             <p className="relative font-semibold text-white">{board.title}</p>
           </Link>
         ))}
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <div
-              role="button"
-              className="border aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition"
-            >
-               <p className="text-sm">Create new board</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-80" side="left">
-          <PopoverClose ref={closeRef} asChild>
-          <Button
-            className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
-            variant="ghost"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </PopoverClose>
-            <div className="grid gap-4">
-              <form onSubmit={handleAddBoard} className="grid gap-2">
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">Create Board</h4>
-                </div>
-                <div className="space-y-2">
-                  <Image
-                    src="images/popover-form-header.svg"
-                    alt="header image"
-                    width={186}
-                    height={100}
-                  />
-                  <UnsplashImageList id="image" errors={fieldErrors} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="width">Board Title</Label>
-                  <Input id="width" className="col-span-2 h-8" name="title" />
-                </div>
-                <div className="flex gap-2 text-xs">
-                  <span role="img" aria-label="wave">
-                    👋
-                  </span>
-                  <p>Board title is required</p>
-                </div>
-                <div>
-                  {fieldErrors.title?.map((error: string) => (
-                    <p className="text-red-500">{error}</p>
-                  ))}
-                </div>
-                <Button type="submit" className="w-full">
-                  Create
-                </Button>
-              </form>
-            </div>
-          </PopoverContent>
-        </Popover>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { ElementRef, useRef } from "react";
 import { deleteBoard } from "@/actions/delete-board-action";
 import { BoardTitleForm } from "./board-title-form";
+import { FormPopover } from "@/components/form/form-popover";
 
 type ListItemProps = {
   board: Board;

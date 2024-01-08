@@ -41,7 +41,7 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-[260px] flex-col z-[99999]",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-[260px] flex-col z-[100]",
           isMobile && "w-0",
           isResetting && "transition-all ease-in-out duration-300",
         )}

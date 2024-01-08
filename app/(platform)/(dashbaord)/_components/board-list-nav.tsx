@@ -5,8 +5,8 @@ import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import ListItem from "./list-item";
-
-
+import { Plus } from "lucide-react";
+import { FormPopover } from "@/components/form/form-popover";
 
 export const BoardListNav = async () => {
   const session = await getServerSession(options);
@@ -39,6 +39,12 @@ export const BoardListNav = async () => {
   }
   return (
     <div>
+      <div className="flex justify-between">
+        <div>Board Items</div>
+        <FormPopover>
+          <Plus className="h-4 w-4 cursor-pointer" />
+        </FormPopover>
+      </div>
       {boards?.map((board: Board) => (
         <ListItem key={board.id} board={board} />
       ))}

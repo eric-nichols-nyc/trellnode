@@ -68,7 +68,7 @@ export const UnsplashImageList = ({ id, errors }: UnsplashImageListProps) => {
                 id={id}
                 name={id}
                 className="hidden"
-                checked={selectedImageId === image.id}
+                defaultChecked={selectedImageId === image.id}
                 disabled={pending}
                 value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
               />

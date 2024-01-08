@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { Github, LogOut, Palette, Settings, User } from "lucide-react";
 import {
