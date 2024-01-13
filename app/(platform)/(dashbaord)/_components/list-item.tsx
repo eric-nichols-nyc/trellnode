@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ElementRef, useRef } from "react";
 import { deleteBoard } from "@/actions/delete-board-action";
-import { BoardTitleForm } from "./board-title-form";
+import { BoardTitleForm } from "../../../../components/form/board-title-form";
 import { FormPopover } from "@/components/form/form-popover";
 
 type ListItemProps = {
@@ -35,7 +35,7 @@ const ListItem = ({ board }: ListItemProps) => {
   return (
     <div className="group p-1">
       <Link
-        href="#"
+        href={`/boards/${board.id}`}
         className="group flex gap-2 justify-between items-center relative h-full w-full"
       >
         <div className="flex items-center gap-2">
@@ -47,7 +47,6 @@ const ListItem = ({ board }: ListItemProps) => {
             width={32}
           />
           </div>
-     
           <BoardTitleForm title={board.title} id={board.id} />
         </div>
         <div className="invisible group-hover:visible">

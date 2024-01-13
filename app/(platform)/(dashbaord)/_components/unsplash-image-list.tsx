@@ -78,7 +78,7 @@ export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageLi
                 className="hidden"
                 defaultChecked={selectedImageId === image.id}
                 disabled={pending}
-                value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
+                value={`${image.id}|${image.urls.thumb}|${image.urls.regular}|${image.links.html}|${image.user.name}`}
               />
               <Image
                 src={image.urls.thumb}
