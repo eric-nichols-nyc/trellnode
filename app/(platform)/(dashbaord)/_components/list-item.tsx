@@ -33,20 +33,24 @@ const ListItem = ({ board }: ListItemProps) => {
   }
 
   return (
-    <div>
+    <div className="group p-1">
       <Link
         href="#"
-        className="group flex gap-2 justify-between relative h-full w-full border"
+        className="group flex gap-2 justify-between items-center relative h-full w-full"
       >
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <div className="h-[20px] w-[32px] bg-primary rounded-sm overflow-hidden">
           <Image
             alt="placeholder image"
             src={board.imageThumbUrl}
             height={20}
-            width={30}
+            width={32}
           />
+          </div>
+     
           <BoardTitleForm title={board.title} id={board.id} />
         </div>
+        <div className="invisible group-hover:visible">
         <Popover>
           <PopoverTrigger asChild>
             <MoreHorizontal />
@@ -66,6 +70,7 @@ const ListItem = ({ board }: ListItemProps) => {
             </Button>
           </PopoverContent>
         </Popover>
+        </div>
       </Link>
     </div>
   );

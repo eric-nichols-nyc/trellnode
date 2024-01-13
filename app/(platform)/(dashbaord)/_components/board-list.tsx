@@ -45,7 +45,7 @@ export const BoardList = ({ boards }: BoardListProps) => {
     }
   }
   return (
-    <div className="w-full max-w-4xl margin m-auto">
+    <div className="w-full max-w-4xl margin m-auto p-8">
       <div className="font-semibold mb-2">Your Boards</div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <FormPopover>

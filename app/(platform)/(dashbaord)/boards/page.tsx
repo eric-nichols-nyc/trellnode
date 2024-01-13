@@ -38,8 +38,11 @@ const Boardspage = async () => {
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-center w-9/12 font-semibold">
-        <div>Trellnode workspace</div>
+      <div className="flex items-center justify-center font-semibold mt-4">
+        <div className="w-full p-3">
+          <div>Trellnode workspace</div>
+          <hr />
+        </div>
       </div>
       <BoardList boards={boards} />
     </div>
