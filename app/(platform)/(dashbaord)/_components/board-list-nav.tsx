@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import ListItem from "./list-item";
+import {BoardListItem} from "./list-item";
 import { Plus } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 
@@ -46,7 +46,7 @@ export const BoardListNav = async () => {
         </FormPopover>
       </div>
       {boards?.map((board: Board) => (
-        <ListItem key={board.id} board={board} />
+        <BoardListItem key={board.id} board={board} />
       ))}
     </div>
   );

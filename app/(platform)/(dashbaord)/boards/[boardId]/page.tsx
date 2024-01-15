@@ -48,7 +48,7 @@ const getBoardById = async (boardId: string) => {
 
 const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   const board = await getBoardById(params.boardId);
-
+ console.log('board', board)
   if(!board){
     return (<p>Sorry not found</p>)
   }
@@ -56,7 +56,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   return (
     <div className="relative h-full bg-no-repeat bg-cover bg-center" style={{backgroundImage: `url(${board?.imageFullUrl})`}}>
       <BoardHeader board={board}/>
-      <BoardLists />
+      <BoardLists board={board} />
     </div>
   );
 };

@@ -16,11 +16,11 @@ import { deleteBoard } from "@/actions/delete-board-action";
 import { BoardTitleForm } from "../../../../components/form/board-title-form";
 import { FormPopover } from "@/components/form/form-popover";
 
-type ListItemProps = {
+type BoardListItemProps = {
   board: Board;
 };
 
-const ListItem = ({ board }: ListItemProps) => {
+export const BoardListItem = ({ board }: BoardListItemProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
 
   async function handleDelete() {
@@ -74,5 +74,3 @@ const ListItem = ({ board }: ListItemProps) => {
     </div>
   );
 };
-
-export default ListItem;

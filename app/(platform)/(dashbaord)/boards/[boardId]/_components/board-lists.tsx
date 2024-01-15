@@ -1,18 +1,51 @@
+import { Board } from "@prisma/client";
 import { AddListForm } from "./add-list-form";
-import { BoardListItem } from "./board-list-item";
+import { BoardList } from "./board-list-item";
+import { prisma } from "@/prisma";
+import { connectToDatabase } from "@/lib/db";
+import { ListWithCards } from "@/types";
 
 type BoardListsProps = {
-  boardId: string;
+  board: Board;
 };
-export const BoardLists = () => {
+
+async function getBoardLists(boardId: string) {
+  // get board lists
+  try {
+    await connectToDatabase();
+    const lists = await prisma.list.findMany({
+      where: {
+        boardId,
+      },
+      include: {
+        cards: {
+          orderBy: {
+            order: "asc",
+          },
+        },
+      },
+      orderBy: {
+        order: "asc",
+      },
+    });
+    return lists;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const BoardLists = async ({ board }: BoardListsProps) => {
+  const lists = await getBoardLists(board.id);
+  console.log("lists", lists);
+  // create catch for lists errors
   return (
     <div className="pt-20 border h-full">
       <div className="gap-3 h-full">
         <div className="h-full overflow-x-auto p-4 ">
           <ol className="flex gap-x-3 h-full">
-            {[...Array(5)].map((_, i) => (
-              <li key={i}>
-                <BoardListItem />
+            {lists?.map((list: ListWithCards, i) => (
+              <li key={list.id}>
+                <BoardList list={list} />
               </li>
             ))}
             <AddListForm />
