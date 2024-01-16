@@ -5,8 +5,9 @@ import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import {BoardListItem} from "./list-item";
-import { Plus } from "lucide-react";
+import { ClipboardList, Plus } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
+import Link from "next/link";
 
 export const BoardListNav = async () => {
   const session = await getServerSession(options);
@@ -39,10 +40,13 @@ export const BoardListNav = async () => {
   }
   return (
     <div>
-      <div className="flex justify-between">
-        <div>Board Items</div>
+      <Link href="/boards" className="p-2 flex gap-2 items-center text-sm hover:bg-slate-200"><ClipboardList size={16} />Boards</Link>
+      <div className="flex justify-between items-center p-2 border">
+        <div>
+          <div>Board Items</div>
+        </div>
         <FormPopover>
-          <Plus className="h-4 w-4 cursor-pointer" />
+          <Plus size={32} className="p-2 cursor-pointer hover:bg-slate-200" />
         </FormPopover>
       </div>
       {boards?.map((board: Board) => (

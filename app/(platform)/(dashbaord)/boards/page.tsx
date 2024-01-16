@@ -5,6 +5,7 @@ import { prisma } from "@/prisma";
 import { BoardList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import { Logo } from "@/components/shared/logo";
 
 const Boardspage = async () => {
   const session = await getServerSession(options);
@@ -38,12 +39,14 @@ const Boardspage = async () => {
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-center font-semibold mt-4">
-        <div className="w-full p-3">
+      <div className="flex items-center justify-center font-semibold h-[124px]">
+        <div className="w-full px-3 flex gap-2 items-center">
+          <Logo />
           <div>Trellnode workspace</div>
-          <hr />
         </div>
       </div>
+      <hr />
+
       <BoardList boards={boards} />
     </div>
   );

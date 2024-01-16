@@ -7,7 +7,6 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { Board } from "@prisma/client";
 
 
 const UpdateBoard = z.object({

@@ -30,9 +30,9 @@ export const AddListForm = () => {
   const [isEditing, setIsEditing] = useState(false);
   if (isEditing) {
     return (
-      <div className="shrink-0 w-[272px] text-white rounded-md">
+      <div className="shrink-0 w-[272px] rounded-md">
         <form action={onSubmit} className="w-full p-3 rounded-md bg-white space-y-4 shadow-md">
-         <Input placeholder="Enter list title..." className="w-full h-10" />
+         <Input placeholder="Enter list title..." className="w-full h-10 text-black" />
           <div className="flex gap-2 justify-center items-center">
             <Button className="w-full h-10 bg-[#5aac44] text-white rounded-md">
               Add List
@@ -50,7 +50,7 @@ export const AddListForm = () => {
   return (
       <Button 
       onClick={() => setIsEditing(true)}
-      className="text-black shrink-0 w-[272px] h-[44px] bg-[#f1f2f4] shadow-md rounded-md flex justify-start">
+      className="text-black shrink-0 w-[272px] h-[44px] bg-[#f1f2f4] hover:bg-[#f1f2f4]/70 shadow-md rounded-md flex justify-start">
             <Plus className="ml-2" size={16} />
             <span>Add another list</span>
       </Button>

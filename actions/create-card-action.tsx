@@ -1,7 +1,6 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/db";
-import { CandlestickChart } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -15,7 +14,7 @@ import { revalidatePath } from "next/cache";
  *      - 1. redirect if no session
  *  - 2. connect to the database with try catch
  *  - 3. find user with prisma
- *  - 4.  validate the data with zod safeParse
+ *  - 4. validate the data with zod safeParse
  *  - 5. create the card with prisma
  *  - 6. revalidate the path
  *  - 7. return the card
