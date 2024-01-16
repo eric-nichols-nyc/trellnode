@@ -4,12 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef } from "react";
 import { Plus, X } from "lucide-react";
 
-const initialState = {
-  boardId: "659b4891337d54fd01558629",
-  order: 0,
-  title: "Title",
-};
-
 type CardData = {
   title: string;
   id?: string;
@@ -18,10 +12,12 @@ type CardData = {
 
 type AddFormProps = {
   btnText: string;
+  placeholder?: string;
+  submitTxt?: string;
   action: (formData: FormData) => void;
 };
 
-export const AddForm = ({ action, btnText }: AddFormProps) => {
+export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   function onSubmit(formData: FormData) {
     // create list
@@ -29,6 +25,7 @@ export const AddForm = ({ action, btnText }: AddFormProps) => {
   }
 
   const [isEditing, setIsEditing] = useState(false);
+
   if (isEditing) {
     return (
       <div className="shrink-0 w-[272px] rounded-md">
@@ -37,10 +34,10 @@ export const AddForm = ({ action, btnText }: AddFormProps) => {
           action={onSubmit}
           className="w-full p-3 rounded-md bg-white space-y-4 shadow-md"
         >
-          <Input placeholder="Enter list title..." className="w-full h-10 text-black" id="title" name="title"/>
+          <Input placeholder={placeholder} className="w-full h-10 text-black" id="title" name="title"/>
           <div className="flex gap-2 justify-center items-center">
             <Button className="w-full h-10 bg-[#5aac44] text-white rounded-md">
-              Add List
+              {submitTxt}
             </Button>
             <X
               className="cursor-pointer"
@@ -55,7 +52,7 @@ export const AddForm = ({ action, btnText }: AddFormProps) => {
   return (
     <Button
       onClick={() => setIsEditing(true)}
-      className="text-black shrink-0 w-[272px] h-[44px] bg-[#f1f2f4] shadow-md rounded-md flex justify-start"
+      className="text-black shrink-0 w-[272px] h-[44px] bg-[#f1f2f4] hover:bg-[rgba(0,0,0,.1)] flex justify-start gap-2"
     >
       <Plus className="ml-2" size={16} />
       <span>{btnText}</span>

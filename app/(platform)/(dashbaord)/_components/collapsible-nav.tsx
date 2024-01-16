@@ -29,7 +29,6 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   }
 
   function openSidebar() {
-    console.log('openSidebar', isMobile)
     if (!sidebarRef.current) return;
     setIsCollapsed(false);
     // if isMobile open to full width

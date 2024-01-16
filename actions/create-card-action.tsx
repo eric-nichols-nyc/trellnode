@@ -27,7 +27,9 @@ const createCardSchema = z.object({
   order: z.number(),
 });
 
-export const createCard = async (data: any) => {
+type InputType = z.infer<typeof createCardSchema>
+
+export const createCard = async (data: InputType) => {
   // get session
   const session = await getServerSession();
   let user;

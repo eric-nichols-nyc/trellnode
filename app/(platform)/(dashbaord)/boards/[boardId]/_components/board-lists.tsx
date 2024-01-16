@@ -36,7 +36,7 @@ async function getBoardLists(boardId: string) {
 
 export const BoardLists = async ({ board }: BoardListsProps) => {
   const lists = await getBoardLists(board.id);
-  console.log("lists", lists);
+  console.log("lists ===== ", lists);
   // create catch for lists errors
   return (
     <div className="pt-20 border h-full">
@@ -48,7 +48,7 @@ export const BoardLists = async ({ board }: BoardListsProps) => {
                 <BoardList list={list} />
               </li>
             ))}
-            <AddListForm />
+            <AddListForm boardId={board.id} />
             <div className="flex-shrink-0 w-1" />
           </ol>
         </div>

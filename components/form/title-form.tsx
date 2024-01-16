@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ElementRef, useRef, useState } from "react";
 import { updateBoard } from "@/actions/update-board-action";
-type BoardTitleFormProps = {
+
+type TitleFormProps = {
   title?: string;
   id: string;
-  update: () => void
+  update: (id:string, title:string) => void
 };
 
 /**
@@ -16,7 +17,7 @@ type BoardTitleFormProps = {
  * call submit
  * @returns
  */
-export const TitleForm = ({ title = "Title", id }: BoardTitleFormProps) => {
+export const TitleForm = ({ title = "Title", id, update }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
@@ -24,13 +25,7 @@ export const TitleForm = ({ title = "Title", id }: BoardTitleFormProps) => {
   const onSubmit = async(formData: FormData) => {
     setIsEditing(false);
     const title = formData.get("title") as string;
-    try{
-        const response = await updateBoard({ title, id });
-        // show sonnar if there was an error
-    }catch(e){
-        console.log('there was an error...')
-    }
-  
+    update(id, title)
   };
   // focus input
   // submit if name has changes

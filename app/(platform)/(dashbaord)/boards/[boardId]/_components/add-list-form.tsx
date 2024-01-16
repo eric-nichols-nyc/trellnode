@@ -5,18 +5,15 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import { createList } from "@/actions/create-list-action";
 
-const initialState = {
-    boardId: "659b4891337d54fd01558629",
-    order: 0,
-    title: "Title"
+  type AddListProps = {
+    boardId: string;
   };
 
-export const AddListForm = () => {
+export const AddListForm = ({boardId}:AddListProps) => {
 
     async function onSubmit(formData: FormData) {
         // create list
-        const title =  "Title";
-        const boardId =  "659b4891337d54fd01558629"
+        const title =  formData.get("title") as string;
         const order = 0
         try{
             const response = await createList({ title, boardId, order });
@@ -32,7 +29,7 @@ export const AddListForm = () => {
     return (
       <div className="shrink-0 w-[272px] rounded-md">
         <form action={onSubmit} className="w-full p-3 rounded-md bg-white space-y-4 shadow-md">
-         <Input placeholder="Enter list title..." className="w-full h-10 text-black" />
+         <Input placeholder="Enter list title..." name="title" className="w-full h-10 text-black" />
           <div className="flex gap-2 justify-center items-center">
             <Button className="w-full h-10 bg-[#5aac44] text-white rounded-md">
               Add List
