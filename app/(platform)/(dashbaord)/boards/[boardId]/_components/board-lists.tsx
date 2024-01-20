@@ -4,6 +4,7 @@ import { BoardList } from "./board-list-item";
 import { prisma } from "@/prisma";
 import { connectToDatabase } from "@/lib/db";
 import { ListWithCards } from "@/types";
+import BoardDnD from "./board-list-dnd";
 
 type BoardListsProps = {
   board: Board;
@@ -42,15 +43,7 @@ export const BoardLists = async ({ board }: BoardListsProps) => {
     <div className="pt-20 border h-full">
       <div className="gap-3 h-full">
         <div className="h-full overflow-x-auto p-4 ">
-          <ol className="flex gap-x-3 h-full">
-            {lists?.map((list: ListWithCards, i) => (
-              <li key={list.id}>
-                <BoardList list={list} />
-              </li>
-            ))}
-            <AddListForm boardId={board.id} />
-            <div className="flex-shrink-0 w-1" />
-          </ol>
+          <BoardDnD lists={lists} boardId={board.id} />
         </div>
       </div>
     </div>

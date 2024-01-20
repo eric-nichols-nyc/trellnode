@@ -4,12 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef } from "react";
 import { Plus, X } from "lucide-react";
 
-type CardData = {
-  title: string;
-  id?: string;
-  order: number;
-};
-
 type AddFormProps = {
   btnText: string;
   placeholder?: string;

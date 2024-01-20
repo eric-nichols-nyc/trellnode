@@ -5,7 +5,7 @@ import { ElementRef, useRef, useState } from "react";
 import { updateBoard } from "@/actions/update-board-action";
 
 type TitleFormProps = {
-  title?: string;
+  title: string;
   id: string;
   update: (id:string, title:string) => void
 };
@@ -17,7 +17,7 @@ type TitleFormProps = {
  * call submit
  * @returns
  */
-export const TitleForm = ({ title = "Title", id, update }: TitleFormProps) => {
+export const TitleForm = ({ title, id, update }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);

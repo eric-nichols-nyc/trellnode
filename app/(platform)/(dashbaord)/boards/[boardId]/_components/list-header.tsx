@@ -20,7 +20,7 @@ export const ListHeader = ({id,title}:ListHeaderProps) => {
     }
   return (
     <div>
-        <TitleForm id={id} update={uptateListTitle}/>
+        <TitleForm title={title} id={id} update={uptateListTitle}/>
     </div>
   )
 }
