@@ -1,12 +1,14 @@
 "use client";
+import { BoardDndList } from "./board-dnd-list";
+import { startTransition, useEffect, useOptimistic } from "react";
 import { ListWithCards } from "@/types";
 import {
   DragDropContext,
-  DragDropContextProps,
   DropResult,
   Droppable,
 } from "@hello-pangea/dnd";
 import { updateListOrder } from "@/actions/update-list-order-action";
+import { AddListForm } from "./add-list-form";
 
 // switch order of two items in an array
 function reorder<T>(array: T[], startIndex: number, endIndex: number) {
@@ -16,20 +18,18 @@ function reorder<T>(array: T[], startIndex: number, endIndex: number) {
   return result;
 }
 
-import { BoardList } from "./board-list-item";
-import { startTransition, useOptimistic } from "react";
-import { List } from "@prisma/client";
-
 type BoardDnDProps = {
   boardId: string;
-  lists: ListWithCards[] | [];
+  lists: ListWithCards[];
 };
 
 /**
  *
  * useoptimiste update to update the list
  */
-const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
+export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
+
+  console.log("lists", lists);
   const [optimisticLists, setOptimisticLists] = useOptimistic(
     lists,
     (state, items:ListWithCards[]) => {
@@ -68,6 +68,13 @@ const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
     }
   }
 
+  useEffect(() => {
+    console.log("lists", lists);
+    startTransition(() => {
+      setOptimisticLists(lists);
+    });
+  },[lists])
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list" type="list" direction="horizontal">
@@ -78,14 +85,15 @@ const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
             {...provided.droppableProps}
           >
             {optimisticLists?.map((list: ListWithCards, i:number) => (
-              <BoardList key={list.id} list={list} index={i} />
+              <BoardDndList key={list.id} list={list} index={i} />
             ))}
             {provided.placeholder}
+            {provided.placeholder}
+            <AddListForm boardId={boardId} />
+            <div className="flex-shrink-0 w-1" />
           </ol>
         )}
       </Droppable>
     </DragDropContext>
   );
 };
-
-export default BoardDnD;

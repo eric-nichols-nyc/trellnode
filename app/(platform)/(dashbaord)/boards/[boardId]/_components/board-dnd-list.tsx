@@ -7,25 +7,28 @@ import { ListCard } from "./list-card";
 import { createCard } from "@/actions/create-card-action";
 import { ListWithCards } from "@/types";
 
-type BoardListProps = {
+type BoardDndListProps = {
   list: ListWithCards;
   index: number;
 };
 
-export const BoardList = ({ list, index }: BoardListProps) => {
-  const { title, id } = list;
+export const BoardDndList = ({ list, index }: BoardDndListProps) => {
+  const { title, id, boardId } = list;
   const { cards } = list;
 
   async function onAddCardSubmitHandler(data: FormData) {
     // add card
     const title = data.get("title") as string;
     const order = cards.length + 1 || 1;
+    console.log('boardId', boardId)
     const newCard = await createCard({
       title,
       order,
       listId: id,
-      boardId: list.boardId,
+      boardId: boardId,
     });
+
+    console.log('newCard', newCard)
   }
   return (
     <Draggable draggableId={id} index={index}>
@@ -38,7 +41,7 @@ export const BoardList = ({ list, index }: BoardListProps) => {
           <div 
             {...provided.dragHandleProps}
             className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2">
-            <ListHeader id={id} title={title} />
+            <ListHeader data={list} />
             <ol className="px-2">
               {
                 // Cards

@@ -29,6 +29,8 @@ const createCardSchema = z.object({
 
 type InputType = z.infer<typeof createCardSchema>
 
+const revalidate = true;
+
 export const createCard = async (data: InputType) => {
   // get session
   const session = await getServerSession();
@@ -66,7 +68,7 @@ export const createCard = async (data: InputType) => {
         listId: data.listId,
       },
     });
-    revalidatePath(`board/${data.boardId}`)
+    revalidatePath(`/boards/${data.boardId}`)
     return card;
   }catch(e){
     return {message: 'Unable to create card'}

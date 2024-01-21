@@ -63,7 +63,7 @@ export async function createList({title, boardId, order}:any) {
                 order,
               }
         });
-        revalidatePath(`boards/${boardId}`);
+        revalidatePath(`/boards/${boardId}`);
         return list;
     } catch (error) {
         return {message: 'Unable to create list'};

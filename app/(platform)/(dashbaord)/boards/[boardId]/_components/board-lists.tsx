@@ -1,16 +1,13 @@
 import { Board } from "@prisma/client";
-import { AddListForm } from "./add-list-form";
-import { BoardList } from "./board-list-item";
 import { prisma } from "@/prisma";
 import { connectToDatabase } from "@/lib/db";
-import { ListWithCards } from "@/types";
-import BoardDnD from "./board-list-dnd";
+import {BoardDnD} from "./board-dnd-container";
 
-type BoardListsProps = {
+type BoardDndListsProps = {
   board: Board;
 };
 
-async function getBoardLists(boardId: string) {
+async function getBoardDndLists(boardId: string) {
   // get board lists
   try {
     await connectToDatabase();
@@ -35,15 +32,17 @@ async function getBoardLists(boardId: string) {
   }
 }
 
-export const BoardLists = async ({ board }: BoardListsProps) => {
-  const lists = await getBoardLists(board.id);
-  console.log("lists ===== ", lists);
+export const BoardDndLists = async ({ board }: BoardDndListsProps) => {
+  const lists = await getBoardDndLists(board.id);
+  console.log('LISTS += ', lists)
   // create catch for lists errors
   return (
     <div className="pt-20 border h-full">
       <div className="gap-3 h-full">
         <div className="h-full overflow-x-auto p-4 ">
-          <BoardDnD lists={lists} boardId={board.id} />
+          {
+            lists && (  <BoardDnD lists={lists} boardId={board.id} />)
+          }
         </div>
       </div>
     </div>

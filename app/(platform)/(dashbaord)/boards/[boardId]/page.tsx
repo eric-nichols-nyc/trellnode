@@ -5,7 +5,7 @@ import { connectToDatabase } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import { BoardLists } from "./_components/board-lists";
+import { BoardDndLists } from "./_components/board-lists";
 
 type BoardIdPageProps = {
   params: {
@@ -56,7 +56,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   return (
     <div className="relative h-full bg-no-repeat bg-cover bg-center" style={{backgroundImage: `url(${board?.imageFullUrl})`}}>
       <BoardHeader board={board}/>
-      <BoardLists board={board} />
+      <BoardDndLists board={board} />
     </div>
   );
 };

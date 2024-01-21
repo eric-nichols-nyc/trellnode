@@ -4,12 +4,12 @@ import { redirect } from "next/navigation";
 import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import {BoardListItem} from "./list-item";
+import {BoardDndListItem} from "./list-item";
 import { ClipboardList, Plus } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 import Link from "next/link";
 
-export const BoardListNav = async () => {
+export const BoardDndListNav = async () => {
   const session = await getServerSession(options);
   if (!session) {
     redirect("/");
@@ -50,7 +50,7 @@ export const BoardListNav = async () => {
         </FormPopover>
       </div>
       {boards?.map((board: Board) => (
-        <BoardListItem key={board.id} board={board} />
+        <BoardDndListItem key={board.id} board={board} />
       ))}
     </div>
   );

@@ -19,11 +19,11 @@ import { ElementRef, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 
-type BoardListProps = {
+type BoardDndListProps = {
   boards: any;
 };
 
-export const BoardList = ({ boards }: BoardListProps) => {
+export const BoardDndList = ({ boards }: BoardDndListProps) => {
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});

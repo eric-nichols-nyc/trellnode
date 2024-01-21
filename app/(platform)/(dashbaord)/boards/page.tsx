@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { connectToDatabase } from "@/lib/db";
 import { prisma } from "@/prisma";
-import { BoardList } from "../_components/board-list";
+import { BoardDndList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { Logo } from "@/components/shared/logo";
@@ -47,7 +47,7 @@ const Boardspage = async () => {
       </div>
       <hr />
 
-      <BoardList boards={boards} />
+      <BoardDndList boards={boards} />
     </div>
   );
 };

@@ -16,11 +16,11 @@ import { deleteBoard } from "@/actions/delete-board-action";
 import { BoardTitleForm } from "../../../../components/form/board-title-form";
 import { FormPopover } from "@/components/form/form-popover";
 
-type BoardListItemProps = {
+type BoardDndListItemProps = {
   board: Board;
 };
 
-export const BoardListItem = ({ board }: BoardListItemProps) => {
+export const BoardDndListItem = ({ board }: BoardDndListItemProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
   const [open, setOpen] = useState(false);
   const [link, setLink] = useState(`/boards/${board.id}`);
