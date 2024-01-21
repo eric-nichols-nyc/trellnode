@@ -7,8 +7,10 @@ import {
   DropResult,
   Droppable,
 } from "@hello-pangea/dnd";
+import { Card } from "@prisma/client";
 import { updateListOrder } from "@/actions/update-list-order-action";
 import { AddListForm } from "./add-list-form";
+import { updateCardOrder } from "@/actions/update-card-order-action";
 
 // switch order of two items in an array
 function reorder<T>(array: T[], startIndex: number, endIndex: number) {
@@ -29,25 +31,36 @@ type BoardDnDProps = {
  */
 export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
 
-  console.log("lists", lists);
+  // console.log("lists", lists);
   const [optimisticLists, setOptimisticLists] = useOptimistic(
     lists,
     (state, items:ListWithCards[]) => {
         return items;
     });
-  /**
-   *
-   * useoptimiste update to update the list
-   */
+
   async function getNewListOrder(items: ListWithCards[]) {
-    const result = await updateListOrder({ items, boardId });
+    try {
+      const result = await updateListOrder({ items, boardId });
+      // console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getNewCardOrder(items: Card[]) {
+    try {
+      const result = await updateCardOrder({ items, boardId });
+      // console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function onDragEnd(result: DropResult) {
     const { destination, source, type } = result;
     if (!destination) return;
 
-    // if droppend in the same place
+    // if item is dropped in the same position
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -65,11 +78,63 @@ export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
         setOptimisticLists(items);
       });
       getNewListOrder(items)
+      // user moves a card
+    }else if(type === 'card'){
+      // check to see if card exists in same list
+      if(source.droppableId === destination.droppableId){
+        // update card order
+        const list = lists.find((list) => list.id === source.droppableId);
+        if(!list) return;
+        const cards = reorder(
+          list.cards,
+          source.index,
+          destination.index
+        ).map((card, i) => ({...card, order: i}))
+        // reset lists with new card order
+        const items = lists.map((list) => {
+          if(list.id === source.droppableId){
+            return {...list, cards}
+          }
+          return list;
+        })
+        // send update to optimistically update the list
+        startTransition(() => {
+          setOptimisticLists(items);
+        });
+        // send cards to db
+        getNewCardOrder(cards)
+      }else{
+        // card is moved to another list
+        const sourceList = lists.find((list) => list.id === source.droppableId);
+        const destinationList = lists.find((list) => list.id === destination.droppableId);
+        if(!sourceList || !destinationList) return;
+        // remove card from source list
+        const newSourceCards = sourceList.cards.filter((card, i) => i !== source.index);
+        // add card to destination list
+        const newDestinationCards = destinationList.cards;
+        newDestinationCards.splice(destination.index, 0, sourceList.cards[source.index]);
+        // reset lists with new card order
+        const items = lists.map((list) => {
+          if(list.id === source.droppableId){
+            return {...list, cards: newSourceCards}
+          }
+          if(list.id === destination.droppableId){
+            return {...list, cards: newDestinationCards}
+          }
+          return list;
+        })
+        // send update to optimistically update the list
+        startTransition(() => {
+          setOptimisticLists(items);
+        });
+        // send cards to db
+        getNewCardOrder(newSourceCards)
+        getNewCardOrder(newDestinationCards)
+      }
     }
   }
 
   useEffect(() => {
-    console.log("lists", lists);
     startTransition(() => {
       setOptimisticLists(lists);
     });

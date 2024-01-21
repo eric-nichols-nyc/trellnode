@@ -48,7 +48,6 @@ const getBoardById = async (boardId: string) => {
 
 const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   const board = await getBoardById(params.boardId);
- console.log('board', board)
   if(!board){
     return (<p>Sorry not found</p>)
   }
