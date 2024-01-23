@@ -54,7 +54,6 @@ export const updateCardOrder = async (data: InputType) => {
             return prisma.card.update({
                 where: {
                     id: card.id,
-                    listId: card.listId,
                 },
                 data: {
                     order: card.order,
@@ -66,6 +65,7 @@ export const updateCardOrder = async (data: InputType) => {
         revalidatePath(`/board/${boardId}`);
         return { data: cards };
     } catch (error) {
+        console.log('UPDATE CARD ERROR: ',error)
         return { message: 'Unable to update card' };
     }
 }

@@ -57,7 +57,7 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
   }
   return (
     <Button 
-    className="h-[44px]"
+    className="h-[44px] text-sm"
     onClick={enableEditing} variant="ghost">
       {title}
     </Button>

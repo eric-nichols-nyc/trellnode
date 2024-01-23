@@ -34,10 +34,9 @@ async function getBoardDndLists(boardId: string) {
 
 export const BoardDndLists = async ({ board }: BoardDndListsProps) => {
   const lists = await getBoardDndLists(board.id);
-  console.log('LISTS += ', lists)
   // create catch for lists errors
   return (
-    <div className="pt-20 border h-full">
+    <div className="pt-20 h-full">
       <div className="gap-3 h-full">
         <div className="h-full overflow-x-auto p-4 ">
           {

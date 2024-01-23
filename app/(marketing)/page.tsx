@@ -1,11 +1,11 @@
-"use client";
-import { signIn, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-export default function Home() {
-  const session = useSession();
-  if (session && session.status === "authenticated") {
+export default async function Home() {
+  const session =await getServerSession();
+  if (session && session.user) {
     redirect("/boards");
   }
   console.log("session", session);

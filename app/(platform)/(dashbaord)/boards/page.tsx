@@ -6,13 +6,14 @@ import { BoardDndList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { Logo } from "@/components/shared/logo";
+import { Sidenav } from "../_components/sidenav";
 
 const Boardspage = async () => {
   const session = await getServerSession(options);
   if (!session) {
     redirect("/");
   }
-
+  console.log("session", session.user);
   let user: User | null = null;
   let boards: Board[] | null = null;
 
@@ -38,16 +39,19 @@ const Boardspage = async () => {
   }
 
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-center font-semibold h-[124px]">
-        <div className="w-full px-3 flex gap-2 items-center">
-          <Logo />
-          <div>Trellnode workspace</div>
+    <div className="w-full flex">
+      <Sidenav />
+      <div className="flex flex-col">
+        <div className="flex items-center justify-center font-semibold h-[124px]">
+          <div className="w-full px-3 flex gap-2 items-center">
+            <Logo />
+            <div>Trellnode workspace</div>
+          </div>
         </div>
-      </div>
-      <hr />
+        <hr />
 
-      <BoardDndList boards={boards} />
+        <BoardDndList boards={boards} />
+      </div>
     </div>
   );
 };

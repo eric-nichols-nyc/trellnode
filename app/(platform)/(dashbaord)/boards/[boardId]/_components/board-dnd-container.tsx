@@ -50,7 +50,7 @@ export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
   async function getNewCardOrder(items: Card[]) {
     try {
       const result = await updateCardOrder({ items, boardId });
-      // console.log(result);
+      console.log(result);
     } catch (e) {
       console.log(e);
     }
@@ -109,10 +109,14 @@ export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
         const destinationList = lists.find((list) => list.id === destination.droppableId);
         if(!sourceList || !destinationList) return;
         // remove card from source list
+        const movedCard = sourceList.cards[source.index];
+        // assign new list id to send to db
+        movedCard.listId = destinationList.id;
+
         const newSourceCards = sourceList.cards.filter((card, i) => i !== source.index);
         // add card to destination list
         const newDestinationCards = destinationList.cards;
-        newDestinationCards.splice(destination.index, 0, sourceList.cards[source.index]);
+        newDestinationCards.splice(destination.index, 0, movedCard);
         // reset lists with new card order
         const items = lists.map((list) => {
           if(list.id === source.droppableId){

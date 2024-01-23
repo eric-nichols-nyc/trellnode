@@ -35,14 +35,15 @@ export const BoardDndList = ({ list, index }: BoardDndListProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
         >
-          <div 
+          <div
             {...provided.dragHandleProps}
-            className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2">
+            className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2"
+          >
             <ListHeader data={list} />
             <Droppable droppableId={id} type="card">
               {(provided, snapshot) => (
                 <ol
-                  className="px-2"
+                  className="px-2 mt-2"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
@@ -52,7 +53,7 @@ export const BoardDndList = ({ list, index }: BoardDndListProps) => {
                   {provided.placeholder}
                 </ol>
               )}
-              </Droppable>
+            </Droppable>
             <AddForm
               action={onAddCardSubmitHandler}
               btnText="Add a card"
