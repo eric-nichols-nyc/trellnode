@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { connectToDatabase } from "@/lib/db";
 import { prisma } from "@/prisma";
-import { BoardDndList } from "../_components/board-list";
+import { AllBoardsList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { Logo } from "@/components/shared/logo";
@@ -39,9 +39,9 @@ const Boardspage = async () => {
   }
 
   return (
-    <div className="w-full flex">
+    <div className="boards-page-container w-full flex justify-center">
       <Sidenav />
-      <div className="flex flex-col">
+      <div className="all-boards flex flex-col w-full max-w-4xl">
         <div className="flex items-center justify-center font-semibold h-[124px]">
           <div className="w-full px-3 flex gap-2 items-center">
             <Logo />
@@ -50,7 +50,7 @@ const Boardspage = async () => {
         </div>
         <hr />
 
-        <BoardDndList boards={boards} />
+        <AllBoardsList boards={boards} />
       </div>
     </div>
   );

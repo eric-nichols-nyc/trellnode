@@ -2,28 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { UnsplashImageList } from "./unsplash-image-list";
 import { useRouter } from "next/navigation";
 import { createBoard } from "@/actions/create-board-action";
-import { Board } from "@prisma/client";
 import { ElementRef, useRef, useState } from "react";
-import { X } from "lucide-react";
+import { UserRound, X } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 
-type BoardDndListProps = {
+type BoardListProps = {
   boards: any;
 };
 
-export const BoardDndList = ({ boards }: BoardDndListProps) => {
+export const AllBoardsList = ({ boards }: BoardListProps) => {
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
@@ -45,9 +40,9 @@ export const BoardDndList = ({ boards }: BoardDndListProps) => {
     }
   }
   return (
-    <div className="w-full max-w-4xl margin m-auto p-8">
-      <div className="font-semibold mb-2">Your Boards</div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="boards-page-board-section-list w-full margin m-auto p-8 border">
+      <div className="font-semibold mb-2 flex gap-2"><UserRound /><span>Your Boards</span></div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
         <FormPopover>
           <div
             role="button"
@@ -60,7 +55,7 @@ export const BoardDndList = ({ boards }: BoardDndListProps) => {
           <Link
             key={board.id}
             href={`/boards/${board.id}`}
-            className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 h-full w-full p-2 overflow-hidden"
+            className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 h-full w-full px-1 py-2 overflow-hidden"
             style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
           >
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />

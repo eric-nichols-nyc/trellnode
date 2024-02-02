@@ -21,7 +21,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
     }
   }
   return (
-    <div className="relative text-sm">
+    <div className="relative">
       <TitleForm title={title} id={id} update={uptateListTitle} />
       <ListOptions listId={id} boardId={boardId} />
     </div>
