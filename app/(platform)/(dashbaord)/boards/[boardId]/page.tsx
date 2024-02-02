@@ -58,7 +58,9 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
       className="flex flex-row relative overflow-y-auto flex-1 bg-cover bg-center"
       style={{ backgroundImage: `url(${board?.imageFullUrl})` }}
     >
+    <div className="bg-neutral-200/20">
       <Sidenav />
+    </div>
       <div className="flex flex-col overflow-y-auto flex-1">
         <div className="grow relative overflow-y-auto">
           <BoardHeader board={board} />

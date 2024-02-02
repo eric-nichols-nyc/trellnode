@@ -39,11 +39,11 @@ export const BoardDndListNav = async () => {
     console.log(e);
   }
   return (
-    <div>
+    <>
       <Link href="/boards" className="p-2 flex gap-2 items-center text-sm hover:bg-slate-200"><ClipboardList size={16} />Boards</Link>
       <div className="flex justify-between items-center p-2 border">
         <div>
-          <div>Board Items</div>
+          <div className="text-sm font-semibold">Your boards</div>
         </div>
         <FormPopover>
           <Plus size={32} className="p-2 cursor-pointer hover:bg-slate-200" />
@@ -52,6 +52,6 @@ export const BoardDndListNav = async () => {
       {boards?.map((board: Board) => (
         <BoardDndListItem key={board.id} board={board} />
       ))}
-    </div>
+    </>
   );
 };
