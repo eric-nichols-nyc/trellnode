@@ -48,14 +48,16 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
 
   if (isEditing) {
     return (
+      <>
       <form action={onSubmit} ref={formRef}>
-        <Input
+        <input
           ref={inputRef}
           onBlur={handleOnBlur}
           defaultValue={title}
           name="title"
         />
       </form>
+      </>
     );
   }
   return (

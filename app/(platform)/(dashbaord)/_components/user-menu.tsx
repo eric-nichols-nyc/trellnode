@@ -1,5 +1,6 @@
+"use client";
 import { signOut } from "next-auth/react";
-import { Github, LogOut, Palette, Settings, User } from "lucide-react";
+import { Github, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +17,7 @@ import Link from "next/link";
 
 const UserMenu = () => {
   return (
-    <div className="w-full flex justify-end">
+    <div className="flex">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div>

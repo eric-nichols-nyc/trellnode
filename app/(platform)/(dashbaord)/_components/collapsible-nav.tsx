@@ -67,5 +67,3 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
     </nav>
   );
 };
-
-export default CollapsibleNav;

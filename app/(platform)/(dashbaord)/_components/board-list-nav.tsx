@@ -9,7 +9,7 @@ import { ClipboardList, Plus } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 import Link from "next/link";
 
-export const BoardDndListNav = async () => {
+export const BoardListNav = async () => {
   const session = await getServerSession(options);
   if (!session) {
     redirect("/");

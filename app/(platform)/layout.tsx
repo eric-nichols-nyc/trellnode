@@ -10,7 +10,6 @@ export default function DashboardLayout({
       <div className="h-full flex flex-col">
         <div className="flex flex-col grow">
         <Navbar />
-
         <main className="h-full">
           {children}</main>
         </div>
