@@ -43,6 +43,7 @@ import { CreateBoardForm } from "./create-board-form";
             <X className="h-4 w-4" />
           </Button>
         </PopoverClose>
+        {/* create board from sidenav */}
         <CreateBoardForm close={onClose}/>
       </PopoverContent>
     </Popover>

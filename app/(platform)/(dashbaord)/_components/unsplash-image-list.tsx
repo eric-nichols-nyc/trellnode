@@ -1,17 +1,19 @@
 import { unsplash } from "@/lib/unsplash";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 type UnsplashImageListProps = {
   id: string;
+  setImageData:(data:any) => void;
   fetchedImgSrc: (src: string) => void;
+  selected: string | null;
   errors?: Record<string, string[] | undefined>;
 };
 
-export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageListProps) => {
+export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedImgSrc }: UnsplashImageListProps) => {
   const { pending } = useFormStatus();
 
   // assign the image list to a variable
@@ -27,9 +29,9 @@ export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageLi
           count: 9,
         });
         if (response && response.response) {
-          console.log(response.response);
+          // console.log(response.response);
           const gallery = response.response as Array<Record<string, any>>;
-          fetchedImgSrc(gallery[0].urls.thumb);
+          fetchedImgSrc(gallery[0].urls.thumb)
           setImages(gallery);
         } else {
           console.error("No response from Unsplash");
@@ -46,10 +48,17 @@ export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageLi
     getImages();
   }, []);
 
-  function setBgImages(id:string, thumb:string){
-    console.log('setBgImage')
-    setSelectedImageId(id)
-    fetchedImgSrc(thumb)
+
+  function setBgImages(data:any){
+    setSelectedImageId(data.id)
+    const imageData = {
+      imageId: data.id,
+      imageThumbUrl: data.urls.thumb,
+      imageFullUrl: data.urls.regular,
+      imageLinkHTML: data.links.html,
+      imageUserName: data.user.name,
+    }
+    setImageData(imageData)
   }
 
   if (loading) {
@@ -69,7 +78,7 @@ export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageLi
               key={image.id}
               className="cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted"
               role="button"
-              onClick={() => setBgImages(image.id, image.urls.thumb)}
+              onClick={() => setBgImages(image)}
             >
               <input
                 type="radio"
@@ -93,6 +102,13 @@ export const UnsplashImageList = ({ id, errors, fetchedImgSrc }: UnsplashImageLi
               >
                 {image.user.name}
               </Link>
+              {
+                selectedImageId === image.id && (
+                  <div className="absolute inset-y-0 h-full w-full bg-black/30 flex items-center justify-center">
+                  <Check className="h-4 w-4 text-white" />
+                </div>
+                )
+              }
             </div>
           </>
         ))}

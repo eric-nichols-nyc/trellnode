@@ -10,80 +10,93 @@ import { z } from "zod";
 
 
 const CreateBoard = z.object({
-    title: z.string({
-      required_error: "Title is required",
-      invalid_type_error: "Title is required",
-    }).min(3, {
-      message: "Title is too short."
-    }),
-    image: z.string({
-      required_error: "Image is required",
-      invalid_type_error: "Image is required",
-    }),
+  title: z.string({
+    required_error: "Title is required",
+    invalid_type_error: "Title is required",
+  }).min(3, {
+    message: "Title is too short."
+  }),
+  imageId: z.string().min(1),
+  imageThumbUrl: z.string().min(1),
+  imageFullUrl: z.string().min(1),
+  imageLinkHTML: z.string().min(1),
+  imageUserName: z.string().min(1),
 });
 
-export async function createBoard({title, image}:any) {
-    const session = await getServerSession(options);
-    if (!session || !session.user) {
-        redirect("/");
-    }
-    let user;
-    try {
-        await connectToDatabase();
-        user = await prisma.user.findUnique({
-            where: {
-                email: session?.user?.email!,
-            },
-        });
-        if (!user) {
-            throw new Error("Unable to find user");
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error("Unable to connect to database");
-    }
+type Data = {
+  title: string;
+  imageId: string;
+  imageThumbUrl: string;
+  imageFullUrl: string;
+  imageLinkHTML: string;
+  imageUserName: string;
+};
 
-    // validate input
-    const validationResult = CreateBoard.safeParse({
-        title,
-        image,
+export async function createBoard({title, imageId,
+  imageThumbUrl,
+  imageFullUrl,
+  imageLinkHTML,
+  imageUserName}:Data) {
+
+  const session = await getServerSession(options);
+  if (!session || !session.user) {
+    redirect("/");
+  }
+  let user;
+  try {
+    await connectToDatabase();
+    user = await prisma.user.findUnique({
+      where: {
+        email: session?.user?.email!,
+      },
     });
-
-    if(!validationResult.success){
-        return {errors: validationResult.error.flatten().fieldErrors};
+    if (!user) {
+      throw new Error("Unable to find user");
     }
-  
-    const [
+  } catch (error) {
+    throw new Error("Unable to connect to database");
+  }
+
+
+  // validate input
+  const validationResult = CreateBoard.safeParse({
+    title,
+    imageId,
+    imageThumbUrl,
+    imageFullUrl,
+    imageLinkHTML,
+    imageUserName
+  });
+
+  if (!validationResult.success) {
+    return { errors: validationResult.error.flatten().fieldErrors };
+  }
+
+
+
+  if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+    return {
+      error: "Missing fields. Failed to create board."
+    };
+  }
+
+  let board;
+
+  try {
+    board = await prisma.board.create({
+      data: {
+        title,
         imageId,
         imageThumbUrl,
         imageFullUrl,
+        imageUserName,
         imageLinkHTML,
-        imageUserName
-      ] = image.split("|");
-
-      if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
-        return {
-          error: "Missing fields. Failed to create board."
-        };
+        userId: user.id,
       }
-    
-      let board;
-    
-      try {
-        board = await prisma.board.create({
-            data: {
-                title,
-                imageId,
-                imageThumbUrl,
-                imageFullUrl,
-                imageUserName,
-                imageLinkHTML,
-                userId: user.id,
-              }
-        });
-        revalidatePath('/boards');
-        return board;
-    } catch (error) {
-        return {message: 'Unable to create boare'};
-    }
+    });
+    revalidatePath('/boards');
+    return board;
+  } catch (error) {
+    return { message: 'Unable to create board' };
+  }
 }

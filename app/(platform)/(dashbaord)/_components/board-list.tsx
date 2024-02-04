@@ -23,22 +23,6 @@ export const AllBoardsList = ({ boards }: BoardListProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
-  async function handleAddBoard(e: any) {
-    e.preventDefault();
-    console.log(e.currentTarget);
-    const formData = new FormData(e.currentTarget);
-    const title = formData.get("title") as string;
-    const image = formData.get("image") as string;
-
-    // call to server action
-    const obj = { title, image };
-    const result = (await createBoard(obj)) as any;
-    if (result.id) {
-      // router.push(`/boards/${result.id}`)
-    } else if (result.errors) {
-      setFieldErrors(result.errors);
-    }
-  }
   return (
     <div className="boards-page-board-section-list w-full margin m-auto p-8">
       <div className="font-semibold mb-2 flex gap-2"><UserRound /><span>Your Boards</span></div>

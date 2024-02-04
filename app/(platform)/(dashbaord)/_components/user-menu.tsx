@@ -14,6 +14,7 @@ import {
 import { IconSize } from "@/constants";
 import { RxAvatar } from "react-icons/rx";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const UserMenu = () => {
   return (
@@ -32,18 +33,23 @@ const UserMenu = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Github className="mr-2 h-4 w-4" />
-            <Link href="https://github.com/eric-nichols-nyc/trellnode" target="_blank">
-            <span>GitHub</span>
+            <Link
+              href="https://github.com/eric-nichols-nyc/trellnode"
+              target="_blank"
+            >
+              <span>GitHub</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-          <LogOut 
-            className="mr-2 h-4 w-4"    
-            onClick={() => {
+            <Button
+              onClick={() => {
                 signOut(), { callbackUrl: "/" };
-              }} />
-            <span>Log out</span>
+              }}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </Button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

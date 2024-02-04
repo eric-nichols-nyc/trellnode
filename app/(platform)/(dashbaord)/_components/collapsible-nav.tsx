@@ -14,13 +14,13 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const MOBILE_W = "260px";
   // nav is 100% width on mobile devices
-  useEffect(() => {
-    if (isMobile) {
-      console.log(true);
-    } else {
-      console.log(false);
-    }
-  }, [isMobile]);
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     console.log(true);
+  //   } else {
+  //     console.log(false);
+  //   }
+  // }, [isMobile]);
 
   function collapseSidebar() {
     setCollapsed(true);

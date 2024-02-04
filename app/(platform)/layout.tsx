@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar } from './(dashbaord)/_components/navbar'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function DashboardLayout({
     children,
@@ -10,8 +11,8 @@ export default function DashboardLayout({
       <div className="h-full flex flex-col">
         <div className="flex flex-col grow">
         <Navbar />
-        <main className="h-full">
-          {children}</main>
+        <Toaster />
+          {children}
         </div>
       </div>
     )
