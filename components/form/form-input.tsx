@@ -21,6 +21,7 @@ type FormInputProps = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
+// eslint-disable-next-line react/display-name
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   (
     {

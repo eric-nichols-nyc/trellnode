@@ -142,6 +142,7 @@ export const BoardDnD = ({ lists, boardId }: BoardDnDProps) => {
     startTransition(() => {
       setOptimisticLists(lists);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[lists])
 
   return (

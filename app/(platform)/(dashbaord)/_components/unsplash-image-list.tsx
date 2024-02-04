@@ -46,7 +46,7 @@ export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedI
     };
 
     getImages();
-  }, []);
+  }, [fetchedImgSrc]);
 
 
   function setBgImages(data:any){
@@ -115,7 +115,7 @@ export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedI
       </div>
       <div>
         {errors?.image?.map((error: string) => (
-          <p className="text-red-500">{error}</p>
+          <p key={error} className="text-red-500">{error}</p>
         ))}
       </div>
     </div>
