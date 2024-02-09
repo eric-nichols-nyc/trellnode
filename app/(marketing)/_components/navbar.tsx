@@ -1,5 +1,5 @@
 import { Logo } from '@/components/shared/logo'
-import { Signin } from '@/components/shared/signin'
+import { Signin } from '@/components/shared/signin/signin'
 import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
 import React from 'react'

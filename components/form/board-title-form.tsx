@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { ElementRef, useRef, useState } from "react";
 import { updateBoard } from "@/actions/update-board-action";
+
 type BoardTitleFormProps = {
   title: string;
   id: string;

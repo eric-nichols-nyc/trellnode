@@ -1,3 +1,4 @@
+"use client";
 import { unsplash } from "@/lib/unsplash";
 import Link from "next/link";
 import { Check, Loader2 } from "lucide-react";

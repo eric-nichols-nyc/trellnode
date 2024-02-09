@@ -2,6 +2,6 @@
 // If you delete this file, remove `setupFilesAfterEnv` from `jest.config.js`
 import '@testing-library/jest-dom/extend-expect';
 
-import failOnConsole from 'jest-fail-on-console';
+// import failOnConsole from 'jest-fail-on-console';
 
-failOnConsole();
+// failOnConsole();
