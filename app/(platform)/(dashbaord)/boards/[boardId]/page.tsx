@@ -57,7 +57,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
     if(board?.imagePrimaryColor){
       return board.imagePrimaryColor
     }else{
-      return 'rgb(229 229 229 / 0.2);'
+      return 'rgb(229 229 229);'
     }
   }
 
@@ -75,7 +75,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
       className="flex flex-row relative overflow-y-auto flex-1 bg-cover bg-center"
       style={{ backgroundImage: `url(${board?.imageFullUrl})`, color:getTheme() === 'light' ? 'black' : 'white'}}
     >
-    <div style={{backgroundColor:getPrimaryColor()}}>
+    <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90">
       <Sidenav />
     </div>
       <div className="flex flex-col overflow-y-auto flex-1">

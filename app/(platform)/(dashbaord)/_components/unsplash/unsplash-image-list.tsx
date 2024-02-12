@@ -64,16 +64,17 @@ export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: U
   if (loading) {
     return (
       <div className="w-full h-20 border p-6 flex items-center justify-center">
-        <Loader2 test-id="loader-component" className="w-6 h-6 animate-spin" />
+        <Loader2 data-testid="loader-component" className="w-6 h-6 animate-spin" />
       </div>
     );
   }
 
   return (
     <div className="relative">
+
       <div className="grid grid-cols-3 gap-2 mb-2">
         {images.map((image) => (
-          <>
+
             <div
               key={image.id}
               className="cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted"
@@ -110,7 +111,6 @@ export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: U
                 )
               }
             </div>
-          </>
         ))}
       </div>
       <div>

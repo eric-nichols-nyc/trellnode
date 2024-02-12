@@ -8,9 +8,18 @@ type BoardHeaderProps = {
   board: Board;
 };
 
+
+
 const BoardHeader = ({board}:BoardHeaderProps) => {
+
+  function getBgColor(){
+    if(board.imagePrimaryColor){
+      return board.imagePrimaryColor;
+    }
+    return "rgba(95,85,69,0.6)";
+  }
   return (
-    <div className="w-full fixed h-14 z-[40] bg-[rgba(95,85,69,0.6)] flex items-center justify-between px-6 gap-x-4">
+    <div style={{backgroundColor:getBgColor()}} className="w-full opacity-85 fixed h-14 z-[40] flex items-center justify-between px-6 gap-x-4">
       <BoardTitleForm id={board.id} title={board.title} />
       <BoardOptions />
     </div>

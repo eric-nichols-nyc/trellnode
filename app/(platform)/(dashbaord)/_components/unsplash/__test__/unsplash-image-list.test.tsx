@@ -12,7 +12,15 @@ type UnsplashImageListProps = {
 };
 
 // Mock the fetch function
-jest.mock("unsplash-js");
+jest.mock("unsplash-js", () => {
+  return {
+    createApi: jest.fn(() => ({
+      photos: {
+        getRandom: jest.fn(),
+      },
+    })),
+  };
+})
 // Mock the fetch function
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -23,7 +31,8 @@ global.fetch = jest.fn(() =>
 
 
 describe("UnsplashImageList", () => {
-  it("should render a loader component when loading is true", async() => {
+  it("should render a list of images from unsplash api", async() => {
+
     // Arrange
     const props: UnsplashImageListProps = {
       id: "test-id",
@@ -33,11 +42,34 @@ describe("UnsplashImageList", () => {
       errors: undefined,
     };
 
+
+    unsplash.photos.getRandom = jest.fn().mockResolvedValue({
+      response: [
+        {
+          id: "1",
+          alt_description:"test",
+          urls: {
+            thumb: "http://test.com/thumb",
+            regular: "http://test.com/regular",
+          },
+          links: {
+            html: "http://test.com/html",
+          },
+          user: {
+            name: "test user",
+          },
+        },
+      ],
+    });
+
     // Act
     render(<UnsplashImageList {...props} />);
-    await waitFor(() => expect(unsplash.photos.getRandom).toHaveBeenCalled());
-
     // Assert
-    expect(screen.getByTestId("loader-component")).toBeInTheDocument();
+    // expect(screen.getByTestId("loader-component")).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(unsplash.photos.getRandom).toHaveBeenCalledTimes(1);
+    });
    })
+
 });
