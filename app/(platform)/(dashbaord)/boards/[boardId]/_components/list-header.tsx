@@ -1,6 +1,6 @@
 "use client";
 
-import { TitleForm } from "@/components/form/title-form";
+import { TitleForm } from "@/components/form/title-form/title-form";
 import { updateBoard } from "@/actions/update-board-action";
 import { ListOptions } from "./list-options";
 import { ListWithCards } from "@/types";

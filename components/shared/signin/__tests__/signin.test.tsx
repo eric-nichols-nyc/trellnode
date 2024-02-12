@@ -15,9 +15,7 @@ describe("Signin", () => {
     });
     render(<Signin />);
     fireEvent.click(screen.getByText("Sign in"));
-    expect(signInMock).toHaveBeenCalledWith("google", {
-      callbackUrl: "/boards",
-    });
+    expect(signInMock).toHaveBeenCalledWith("google");
   });
 
   // The Button component is not rendered with any props.

@@ -53,12 +53,29 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
     return <p>Sorry not found</p>;
   }
 
+  function getPrimaryColor() {
+    if(board?.imagePrimaryColor){
+      return board.imagePrimaryColor
+    }else{
+      return 'rgb(229 229 229 / 0.2);'
+    }
+  }
+
+  function getTheme(){
+    if(board?.backgroundBrightness === 'light'){
+      return 'light'
+    }else{
+      return 'dark'
+    }
+  }
+
   return (
     <div
+      data-theme={getTheme()}
       className="flex flex-row relative overflow-y-auto flex-1 bg-cover bg-center"
-      style={{ backgroundImage: `url(${board?.imageFullUrl})` }}
+      style={{ backgroundImage: `url(${board?.imageFullUrl})`, color:getTheme() === 'light' ? 'black' : 'white'}}
     >
-    <div className="bg-neutral-200/20">
+    <div style={{backgroundColor:getPrimaryColor()}}>
       <Sidenav />
     </div>
       <div className="flex flex-col overflow-y-auto flex-1">

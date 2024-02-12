@@ -30,12 +30,16 @@ type Data = {
   imageFullUrl: string;
   imageLinkHTML: string;
   imageUserName: string;
+  imagePrimaryColor?: string;
+  imageSecondaryColor?: string;
 };
 
 export async function createBoard({title, imageId,
   imageThumbUrl,
   imageFullUrl,
   imageLinkHTML,
+  imagePrimaryColor,
+  imageSecondaryColor,
   imageUserName}:Data) {
 
   const session = await getServerSession(options);
@@ -82,6 +86,8 @@ export async function createBoard({title, imageId,
 
   let board;
 
+  console.log(imagePrimaryColor, imageSecondaryColor)
+
   try {
     board = await prisma.board.create({
       data: {
@@ -92,11 +98,14 @@ export async function createBoard({title, imageId,
         imageUserName,
         imageLinkHTML,
         userId: user.id,
+        imagePrimaryColor,
+        imageSecondaryColor,
       }
     });
     revalidatePath('/boards');
     return board;
   } catch (error) {
+    console.error(error);
     return { message: 'Unable to create board' };
   }
 }

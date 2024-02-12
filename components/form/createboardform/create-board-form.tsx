@@ -1,24 +1,32 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { UnsplashImageList } from "@/app/(platform)/(dashbaord)/_components/unsplash-image-list";
+import { UnsplashImageList } from "@/app/(platform)/(dashbaord)/_components/unsplash/unsplash-image-list";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { createBoard } from "@/actions/create-board-action";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { Board } from "@prisma/client";
+import ColorThief from "colorthief";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 type CreateBoardFormProps = {
   close: () => void;
 };
-
+/**
+ * 
+ * user can create a board
+ * user selects image and title and send bg info to server action
+ */
 export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
   const router = useRouter();
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [fetchedImgSrc, setFetchedImgSrc] = useState<string>("");
   const [imageData, setImageData] = useState<Board | null>(null);
+  const [bgColors, setBgColors] = useState<string[] | null>([])
+  const [bgbrightness, setBgBrightness] = useState('dark')
   const [selected, setSelected] = useState<string | null>(null);
 
   async function handleAddBoard(e: any) {
@@ -41,9 +49,11 @@ export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
       imageFullUrl,
       imageLinkHTML,
       imageUserName,
+      imagePrimaryColor: bgColors ? bgColors[0] : '',
+      imageSecondaryColor: bgColors ? bgColors[1] : '',
+      backgroundBrightness: bgbrightness
     };
     const result = (await createBoard(obj)) as any;
-    console.log(result);
     if (result.id) {
       router.push(`/boards/${result.id}`);
       close();
@@ -68,6 +78,26 @@ export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
     setSelected(data.imageId);
   }
 
+  function handleBgImageLoaded(img: React.SyntheticEvent<HTMLImageElement, Event>): void {
+    const colorThief = new ColorThief();
+    const colorPalette = colorThief.getPalette(img.target, 2);
+    setBgColors(colorPalette.map((color:string[]) => `rgb(${color[0]}, ${color[1]}, ${color[2]})`));
+    setBgBrightness(isColorDark(colorPalette[0][0], colorPalette[0][1], colorPalette[0][2]))
+  }
+
+  // find primary color and send to zustand
+  function isColorDark(r: number, g: number, b: number): string {
+    // Calculate relative luminance
+    const luminance: number = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+
+    // Check if the color is dark or light based on luminance threshold
+    if (luminance <= 0.5) {
+        return 'dark';
+    } else {
+        return 'light';
+    }
+}
+
   return (
     <div className="grid gap-4">
       <form onSubmit={handleAddBoard} className="grid gap-2">
@@ -75,17 +105,26 @@ export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
           <h4 className="font-medium leading-none">Create Board</h4>
         </div>
         {/* header image */}
-        <div
-          style={{ backgroundImage: `url(${fetchedImgSrc})` }}
-          className="space-y-2 border flex items-center justify-center w-[200px] h-[120px] m-auto"
-        >
+        <div className="relative space-y-2 border flex items-center justify-center w-[200px] h-[120px] m-auto">
+          <img src={fetchedImgSrc} className="w-full h-full" crossOrigin="anonymous" alt="header image" onLoad={(img) => handleBgImageLoaded(img)} />
           <Image
+            className="absolute top-0 left-2"
             src="/images/popover-form-header.svg"
             alt="header image"
             width={180}
             height={96}
           />
+               <div className="mt-10">
+               {
+           
+          bgColors?.map((color:string) => (
+            <div key={color} style={{backgroundColor: color}} className="w-4 h-4 rounded-full border border-white"></div>
+          ))
+      
+        }
+            </div>
         </div>
+   
         <UnsplashImageList
           id="image"
           errors={fieldErrors}

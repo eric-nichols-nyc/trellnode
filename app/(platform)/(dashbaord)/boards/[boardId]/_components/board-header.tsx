@@ -10,7 +10,7 @@ type BoardHeaderProps = {
 
 const BoardHeader = ({board}:BoardHeaderProps) => {
   return (
-    <div className="w-full fixed h-14 z-[40] bg-black/50 top-14 flex items-center justify-between px-6 gap-x-4">
+    <div className="w-full fixed h-14 z-[40] bg-[rgba(95,85,69,0.6)] flex items-center justify-between px-6 gap-x-4">
       <BoardTitleForm id={board.id} title={board.title} />
       <BoardOptions />
     </div>

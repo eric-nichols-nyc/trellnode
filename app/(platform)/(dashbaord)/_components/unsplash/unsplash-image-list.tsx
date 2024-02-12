@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Check, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useFormStatus } from "react-dom";
 
 type UnsplashImageListProps = {
   id: string;
@@ -14,13 +13,13 @@ type UnsplashImageListProps = {
   errors?: Record<string, string[] | undefined>;
 };
 
-export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedImgSrc }: UnsplashImageListProps) => {
-  const { pending } = useFormStatus();
+export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: UnsplashImageListProps) => {
 
   // assign the image list to a variable
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+
 
   useEffect(() => {
     const getImages = async () => {
@@ -65,7 +64,7 @@ export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedI
   if (loading) {
     return (
       <div className="w-full h-20 border p-6 flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin" />
+        <Loader2 test-id="loader-component" className="w-6 h-6 animate-spin" />
       </div>
     );
   }
@@ -87,7 +86,7 @@ export const UnsplashImageList = ({ id, errors, selected, setImageData, fetchedI
                 name={id}
                 className="hidden"
                 defaultChecked={selectedImageId === image.id}
-                disabled={pending}
+                disabled={loading}
                 value={`${image.id}|${image.urls.thumb}|${image.urls.regular}|${image.links.html}|${image.user.name}`}
               />
               <Image

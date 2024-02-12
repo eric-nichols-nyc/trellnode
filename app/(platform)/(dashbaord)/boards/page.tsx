@@ -13,7 +13,6 @@ const Boardspage = async () => {
   if (!session) {
     redirect("/");
   }
-  console.log("session", session.user);
   let user: User | null = null;
   let boards: Board[] | null = null;
 

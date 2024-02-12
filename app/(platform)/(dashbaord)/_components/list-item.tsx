@@ -11,26 +11,23 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, useRef } from "react";
 import { deleteBoard } from "@/actions/delete-board-action";
-import { BoardTitleForm } from "../../../../components/form/board-title-form";
-import { FormPopover } from "@/components/form/form-popover";
-
+import { toast } from "sonner";
 type BoardDndListItemProps = {
   board: Board;
 };
 
 export const BoardDndListItem = ({ board }: BoardDndListItemProps) => {
   const closeRef = useRef<ElementRef<"button">>(null);
-  const [open, setOpen] = useState(false);
-  const [link, setLink] = useState(`/boards/${board.id}`);
 
   async function handleDelete() {
     try{
         await deleteBoard(board.id);
-        alert("Board deleted");
+        toast.success('Board deleted successfully');
     }catch(e){
-        console.log('e =', e)
+      console.error('there was an error deleting the board', e);  
+      toast.error('There was an error deleting the board. Please try again.');
     }
   }
 
@@ -41,7 +38,7 @@ export const BoardDndListItem = ({ board }: BoardDndListItemProps) => {
         href={`/boards/${board.id}`}
         className="group flex 
           py-2 justify-between items-center 
-          relative h-full w-full bg-secondary hover:bg-slate-200"
+          relative h-full w-full hover:bg-slate-200/50"
       >
         <div className="flex items-center gap-2 px-2">
           <div className="h-[20px] w-[32px] bg-primary rounded-sm overflow-hidden">

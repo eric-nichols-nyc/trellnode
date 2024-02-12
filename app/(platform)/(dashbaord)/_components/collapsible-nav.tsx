@@ -3,6 +3,7 @@ import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
+import { useTheme } from "next-themes";
 
 type CollapsibleProps = {
   children: React.ReactNode;
@@ -12,15 +13,12 @@ export const CollapsibleNav = ({ children }: CollapsibleProps) => {
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
   const [isResetting, setIsResetting] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const { theme, setTheme } = useTheme();
   const MOBILE_W = "260px";
   // nav is 100% width on mobile devices
-  // useEffect(() => {
-  //   if (isMobile) {
-  //     console.log(true);
-  //   } else {
-  //     console.log(false);
-  //   }
-  // }, [isMobile]);
+  useEffect(() => {
+    setTheme("light");
+  }, [setTheme]);
 
   function collapseSidebar() {
     setCollapsed(true);

@@ -5,7 +5,7 @@ import {CollapsibleNav} from "./collapsible-nav";
 export const Sidenav = () => {
   return (
       <CollapsibleNav>
-        <div className="h-[42px] flex items-center px-2 gap-1">
+        <div className="h-[42px] flex items-center px-2 gap-1  dark:text-red-900">
           <Logo size={20}  />
           <p className="text-sm font-semibold">Trellnode workspace</p>
         </div>

@@ -41,7 +41,7 @@ export const BoardListNav = async () => {
   return (
     <>
       <Link href="/boards" className="p-2 flex gap-2 items-center text-sm hover:bg-slate-200"><ClipboardList size={16} />Boards</Link>
-      <div className="flex justify-between items-center p-2 border">
+      <div className="flex justify-between items-center p-2">
         <div>
           <div className="text-sm font-semibold">Your boards</div>
         </div>

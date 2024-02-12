@@ -26,6 +26,9 @@ model Board {
   imageFullUrl  String
   imageUserName String
   imageLinkHTML String
+  imagePrimaryColor String?
+  imageSecondaryColor String?
+  backgroundBrightness String?
   userId        String @db.ObjectId
   lists         List[]
   createdAt     DateTime @default(now())

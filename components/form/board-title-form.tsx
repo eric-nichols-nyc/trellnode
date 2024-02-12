@@ -48,7 +48,6 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
 
   if (isEditing) {
     return (
-      <>
       <form action={onSubmit} ref={formRef}>
         <input
           ref={inputRef}
@@ -57,11 +56,10 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
           name="title"
         />
       </form>
-      </>
     );
   }
   return (
-    <Button onClick={enableEditing} variant="ghost" className="text-white">
+    <Button onClick={enableEditing} variant="ghost">
       {title}
     </Button>
   );

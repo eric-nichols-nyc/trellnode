@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/popover";
 import { Button } from "../ui/button";
 import { X } from "lucide-react";
-import { CreateBoardForm } from "./create-board-form";
+import { CreateBoardForm } from "./createboardform/create-board-form";
 
   type FormPopoverProps = {
     children: React.ReactNode;
