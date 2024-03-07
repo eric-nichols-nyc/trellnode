@@ -1,6 +1,6 @@
 import { chromium } from '@playwright/test'
 import path from 'node:path'
-import prisma from '../../lib/prisma'
+import prisma from '../../prisma'
 
 export default async function globalConfig() {
   const storagePath = path.resolve(__dirname, 'storageState.json')
