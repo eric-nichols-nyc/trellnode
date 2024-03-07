@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "cypress:open": "cypress open",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.5.0",
