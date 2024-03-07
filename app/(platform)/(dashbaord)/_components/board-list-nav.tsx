@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/lib/db";
 import { User, getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { Board } from "@prisma/client";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import {BoardDndListItem} from "./list-item";
 import { ClipboardList, Plus } from "lucide-react";

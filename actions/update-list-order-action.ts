@@ -4,7 +4,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { connectToDatabase } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { z } from 'zod';
 import { revalidatePath } from "next/cache";
 

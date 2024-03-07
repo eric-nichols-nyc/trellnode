@@ -1,5 +1,5 @@
 import BoardHeader from "./_components/board-header";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { Board, User } from "@prisma/client";
 import { connectToDatabase } from "@/lib/db";
 import { getServerSession } from "next-auth/next";

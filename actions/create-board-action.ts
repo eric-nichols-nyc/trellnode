@@ -1,7 +1,7 @@
 "use server";
 
 import { connectToDatabase } from "@/lib/db";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";

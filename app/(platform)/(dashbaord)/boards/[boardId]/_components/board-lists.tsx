@@ -1,5 +1,5 @@
 import { Board } from "@prisma/client";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { connectToDatabase } from "@/lib/db";
 import {BoardDnD} from "./board-dnd-container";
 
