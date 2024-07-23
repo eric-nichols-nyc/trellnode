@@ -39,11 +39,11 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
   };
 
   const enableEditing = () => {
-    setIsEditing(true);
-    setTimeout(() => {
-      inputRef.current?.focus();
-      inputRef.current?.select();
-    });
+    // setIsEditing(true);
+    // setTimeout(() => {
+    //   inputRef.current?.focus();
+    //   inputRef.current?.select();
+    // });
   };
 
   if (isEditing) {
