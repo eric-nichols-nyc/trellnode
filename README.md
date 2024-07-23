@@ -1,8 +1,12 @@
 Trellnode - Task Application
-https://account.mongodb.com/account/login
+I wanted a clone on of my favorite appllications for task management.
+
+
+Next JS
+Next Auth
+Test - Playwright
 
 pages
-
 - landing
 - boards
 

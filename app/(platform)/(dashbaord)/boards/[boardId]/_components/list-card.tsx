@@ -14,7 +14,7 @@ export const ListCard = ({ card, index }: ListCardProps) => {
     <Draggable draggableId={card.id} index={index}>
       {(provided, snapshot) => (
         <li
-          className="p-2 rounded-md bg-white shadow-md mb-2 text-sm"
+          className="p-2 rounded-md bg-white text-black  shadow-md mb-2 text-sm"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
