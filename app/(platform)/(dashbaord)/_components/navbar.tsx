@@ -10,7 +10,7 @@ export const Navbar = () => {
           <Logo /> <span className="font-semibold">Trellnode</span>
         </div>
         <div className="flex justify-end items-center gap-2">
-          <NavSearch />
+          {/* <NavSearch /> */}
           <UserMenu />
         </div>
       </div>
