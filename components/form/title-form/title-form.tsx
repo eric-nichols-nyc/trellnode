@@ -47,6 +47,7 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
     return (
       <form action={onSubmit} ref={formRef}>
         <Input
+        className="text-black"
           ref={inputRef}
           onBlur={handleOnBlur}
           defaultValue={title}

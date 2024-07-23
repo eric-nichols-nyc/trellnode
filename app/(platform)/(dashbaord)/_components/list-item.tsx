@@ -54,7 +54,7 @@ export const BoardDndListItem = ({ board }: BoardDndListItemProps) => {
           </div>
         </div>
       </Link>
-      <div className="px-2 absolute right-4 top-3 z-10">
+      <div className="hidden px-2 absolute right-4 top-3 z-10">
         <Popover>
           <PopoverTrigger asChild> 
             <MoreHorizontal size={16} className="cursor-pointer hover:bg-slate-100"/>

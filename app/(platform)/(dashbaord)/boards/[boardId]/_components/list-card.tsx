@@ -19,7 +19,7 @@ export const ListCard = ({ card, index }: ListCardProps) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {title} - {index}
+          {title}
         </li>
       )}
     </Draggable>
