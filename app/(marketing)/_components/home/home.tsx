@@ -1,50 +1,58 @@
-"use client"
+"use client";
+
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { LayoutGrid, Users, Zap } from "lucide-react";
 
 export function Home() {
   return (
-    <div className="flex items-center justify-center flex-col">
-      <div className="flex flex-col lg:flex-row items-center lg:items-start p-40">
-        <div className="flex flex-col items-center">
-          <h1 className="text-xl mb-6">
-            Trellnode brings all your tasks, teammates, and tools together
+    <div className="min-h-[calc(100vh-3.5rem)] flex flex-col">
+      <section className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 px-6 py-16 lg:py-24 max-w-6xl mx-auto">
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-stone-900 leading-[1.1] mb-4">
+            Organize anything,{" "}
+            <span className="text-amber-600">together</span>
           </h1>
-          <div className="px-6 sm:px-0 max-w-sm">
-          <button
-            type="button"
-            onClick={() => signIn("google")}
-            className="text-white w-full  bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
-          >
-            <svg
-              className="mr-2 -ml-1 w-4 h-4"
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fab"
-              data-icon="google"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 488 512"
-            >
-              <path
-                fill="currentColor"
-                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"
-              ></path>
-            </svg>
-            Sign in with Google<div></div>
-          </button>
+          <p className="text-lg text-stone-600 mb-8 leading-relaxed">
+            Trellnode brings all your tasks, teammates, and tools together in one
+            place. Keep work visible, stay in sync, and get more done.
+          </p>
+          <Button asChild size="lg" className="text-base px-8 h-12 rounded-lg">
+            <Link href="/signin">Get started — it&apos;s free</Link>
+          </Button>
+          <div className="mt-12 flex flex-wrap gap-8 justify-center lg:justify-start text-sm text-stone-500">
+            <span className="flex items-center gap-2">
+              <LayoutGrid className="h-4 w-4 text-amber-500" />
+              Boards & lists
+            </span>
+            <span className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-amber-500" />
+              Collaborate
+            </span>
+            <span className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-amber-500" />
+              Ship faster
+            </span>
+          </div>
         </div>
-        </div>
-        <div>
-          <Image
-            src="/images/TrelloUICollage_4x.webp"
-            width={500}
-            height={500}
-            alt="Trello UI Collage"
+        <div className="relative flex-shrink-0">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-stone-200/50 ring-1 ring-stone-200/80">
+            <Image
+              src="/images/TrelloUICollage_4x.webp"
+              width={560}
+              height={420}
+              alt="Trellnode boards and cards"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div
+            className="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-br from-amber-200/30 to-stone-200/20 blur-2xl"
+            aria-hidden
           />
         </div>
-
-      </div>
+      </section>
     </div>
   );
 }
