@@ -1,14 +1,12 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Github, LogOut } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IconSize } from "@/constants";
@@ -17,6 +15,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const UserMenu = () => {
+  const { data: session } = useSession();
+
   return (
     <div className="flex">
       <DropdownMenu>
@@ -30,7 +30,19 @@ const UserMenu = () => {
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuSeparator />
+          {session?.user?.name && (
+            <>
+              <DropdownMenuLabel className="font-normal">
+                <p className="text-sm font-medium">{session.user.name}</p>
+                {session.user.email && (
+                  <p className="text-xs text-muted-foreground truncate">
+                    {session.user.email}
+                  </p>
+                )}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+            </>
+          )}
           <DropdownMenuItem>
             <Github className="mr-2 h-4 w-4" />
             <Link
