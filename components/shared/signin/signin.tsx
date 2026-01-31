@@ -54,18 +54,20 @@ export const Signin = () => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-xs">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="grid gap-2">
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required={isSignUp}
-            autoComplete="name"
-          />
-        </div>
+        {isSignUp && (
+          <div className="grid gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              autoComplete="name"
+            />
+          </div>
+        )}
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
           <Input

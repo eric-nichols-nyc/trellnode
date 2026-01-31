@@ -6,12 +6,18 @@ jest.mock("../../../../actions/signup-action", () => ({ signUp: jest.fn() }));
 const nextAuthReactMocked = nextAuthReact as jest.Mocked<typeof nextAuthReact>;
 
 describe("Signin", () => {
-  it("should render name, email, password inputs and Sign in button", () => {
+  it("should render email, password inputs and Sign in button", () => {
     render(<Signin />);
-    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/name/i)).not.toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /sign in/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Sign in" })).toBeInTheDocument();
+  });
+
+  it("should show name field when Create an account is clicked", () => {
+    render(<Signin />);
+    fireEvent.click(screen.getByText("Create an account"));
+    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
   });
 
   it("should call signIn with credentials when form is submitted", async () => {
@@ -28,7 +34,7 @@ describe("Signin", () => {
     fireEvent.change(screen.getByLabelText(/password/i), {
       target: { value: "password123" },
     });
-    fireEvent.click(screen.getByRole("button", { name: /sign in/i }));
+    fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
     await screen.findByText("Please wait…");
     expect(nextAuthReactMocked.signIn).toHaveBeenCalledWith("credentials", {
       email: "test@example.com",
