@@ -31,10 +31,11 @@ export const Signin = () => {
         setPassword("");
         setIsSignUp(false);
       } else {
+        console.log('Signing In...')
         const result = await signIn("credentials", {
           email,
           password,
-          callbackUrl: CALLBACK_URL,
+          callbackUrl: `${window.location.href}/boards"}`,
           redirect: false,
         });
         if (result?.error) {
