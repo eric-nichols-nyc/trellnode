@@ -35,12 +35,12 @@ export const AllBoardsList = ({ boards }: BoardListProps) => {
             <p className="text-sm">Create new board</p>
           </div>
         </FormPopover>
-        {boards.map((board: any) => (
+        {(boards ?? []).map((board: any) => (
           <Link
             key={board.id}
             href={`/boards/${board.id}`}
             className="group relative aspect-video bg-no-repeat bg-center bg-cover bg-sky-700 h-full w-full px-1 py-2 overflow-hidden"
-            style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
+            style={{ backgroundImage: board.imageThumbUrl ? `url(${board.imageThumbUrl})` : undefined }}
           >
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
             <p className="relative font-semibold text-white p-1">{board.title}</p>

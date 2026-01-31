@@ -1,5 +1,4 @@
 "use client";
-import { unsplash } from "@/lib/unsplash";
 import Link from "next/link";
 import { Check, Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -15,30 +14,35 @@ type UnsplashImageListProps = {
 
 export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: UnsplashImageListProps) => {
 
-  // assign the image list to a variable
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
-
 
   useEffect(() => {
     const getImages = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await unsplash.photos.getRandom({
-          collectionIds: ["317099"],
-          count: 9,
-        });
-        if (response && response.response) {
-          // console.log(response.response);
-          const gallery = response.response as Array<Record<string, any>>;
-          fetchedImgSrc(gallery[0].urls.thumb)
+        const res = await fetch("/api/unsplash?count=9&collectionIds=317099");
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data.error ?? "Failed to load images");
+          setImages([]);
+          return;
+        }
+        const gallery = Array.isArray(data) ? data : [];
+        if (gallery.length > 0) {
+          const first = gallery[0];
+          const thumb = first.urls?.thumb ?? first.urls?.small;
+          if (thumb) fetchedImgSrc(thumb);
           setImages(gallery);
         } else {
-          console.error("No response from Unsplash");
-          setImages([]);
+          setError("No images returned");
         }
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load images");
         setImages([]);
       } finally {
         setLoading(false);
@@ -69,6 +73,17 @@ export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: U
     );
   }
 
+  if (error) {
+    return (
+      <div className="w-full border p-4 rounded-md bg-destructive/10">
+        <p className="text-sm text-destructive">{error}</p>
+        <p className="text-xs text-muted-foreground mt-1">
+          Check UNSPLASH_ACCESS_KEY or NEXT_PUBLIC_UNSPLASH_ACCESS_KEY in .env
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
 
@@ -91,8 +106,8 @@ export const UnsplashImageList = ({ id, errors, setImageData, fetchedImgSrc }: U
                 value={`${image.id}|${image.urls.thumb}|${image.urls.regular}|${image.links.html}|${image.user.name}`}
               />
               <Image
-                src={image.urls.thumb}
-                alt={image.alt_description}
+                src={image.urls?.thumb ?? "/images/next.svg"}
+                alt={image.alt_description ?? "Unsplash"}
                 className="object-cover"
                 fill
               />

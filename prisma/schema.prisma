@@ -6,53 +6,53 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
-model User{
-  id  String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  email String @unique
-  image String?
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  image          String?
   hashedPassword String?
+  boards         Board[]
 }
 
 model Board {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  imageId       String
-  imageThumbUrl String
-  imageFullUrl  String
-  imageUserName String
-  imageLinkHTML String
-  imagePrimaryColor String?
-  imageSecondaryColor String?
+  id                   String   @id @default(cuid())
+  title                String
+  imageId              String
+  imageThumbUrl        String
+  imageFullUrl         String
+  imageUserName        String
+  imageLinkHTML        String
+  imagePrimaryColor    String?
+  imageSecondaryColor  String?
   backgroundBrightness String?
-  userId        String @db.ObjectId
-  lists         List[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lists                List[]
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 }
 
-
 model List {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   title     String
   order     Int
-  boardId   String @db.ObjectId
-  board     Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId   String
+  board     Board   @relation(fields: [boardId], references: [id], onDelete: Cascade)
   cards     Card[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Card {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
   title     String
   order     Int
-  listId    String @db.ObjectId
-  list      List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId    String
+  list      List    @relation(fields: [listId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

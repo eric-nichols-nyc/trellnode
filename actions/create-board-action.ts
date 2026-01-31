@@ -78,9 +78,17 @@ export async function createBoard({title, imageId,
 
 
 
-  if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+  const invalid =
+    !imageId ||
+    !imageThumbUrl ||
+    !imageFullUrl ||
+    !imageUserName ||
+    !imageLinkHTML ||
+    imageThumbUrl === "undefined" ||
+    imageFullUrl === "undefined";
+  if (invalid) {
     return {
-      error: "Missing fields. Failed to create board."
+      error: "Missing image. Please select a background image and try again.",
     };
   }
 

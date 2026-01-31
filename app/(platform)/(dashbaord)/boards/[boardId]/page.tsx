@@ -73,7 +73,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
     <div
       data-theme={getTheme()}
       className="flex flex-row relative overflow-y-auto flex-1 bg-cover bg-center"
-      style={{ backgroundImage: `url(${board?.imageFullUrl})`, color:getTheme() === 'light' ? 'black' : 'white'}}
+      style={{ backgroundImage: board?.imageFullUrl ? `url(${board.imageFullUrl})` : undefined, color: getTheme() === 'light' ? 'black' : 'white' }}
     >
     <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90">
       <Sidenav />

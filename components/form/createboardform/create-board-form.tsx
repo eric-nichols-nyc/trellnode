@@ -31,16 +31,23 @@ export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
 
   async function handleAddBoard(e: any) {
     e.preventDefault();
-    console.log(e.currentTarget);
     const formData = new FormData(e.currentTarget);
     const title = formData.get("title") as string;
     const image = formData.get("image") as string;
+    if (!image || image.startsWith("undefined") || !image.includes("|")) {
+      toast.error("Please select a background image first.");
+      return;
+    }
     const image_split = image.split("|");
     const imageId = image_split[0];
     const imageThumbUrl = image_split[1];
     const imageFullUrl = image_split[2];
     const imageLinkHTML = image_split[3];
     const imageUserName = image_split[4];
+    if (!imageId || !imageThumbUrl || !imageFullUrl || imageThumbUrl === "undefined") {
+      toast.error("Please select a background image first.");
+      return;
+    }
     // call to server action
     const obj = {
       title,
@@ -154,7 +161,7 @@ export const CreateBoardForm = ({ close }: CreateBoardFormProps) => {
             </p>
           ))}
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={!imageData}>
           Create
         </Button>
       </form>

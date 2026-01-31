@@ -42,12 +42,16 @@ export const BoardDndListItem = ({ board }: BoardDndListItemProps) => {
       >
         <div className="flex items-center gap-2 px-2">
           <div className="h-[20px] w-[32px] bg-primary rounded-sm overflow-hidden">
-          <Image
-            alt="placeholder image"
-            src={board.imageThumbUrl}
-            height={20}
-            width={32}
-          />
+          {board.imageThumbUrl ? (
+            <Image
+              alt="placeholder image"
+              src={board.imageThumbUrl}
+              height={20}
+              width={32}
+            />
+          ) : (
+            <div className="h-full w-full bg-muted" aria-hidden />
+          )}
           </div>
           <div>
             <h2 className="text-sm">{board.title}</h2>
