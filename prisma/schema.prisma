@@ -51,6 +51,7 @@ model Card {
   id        String   @id @default(cuid())
   title     String
   order     Int
+  imageUrl  String?
   listId    String
   list      List    @relation(fields: [listId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())

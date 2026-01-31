@@ -40,7 +40,7 @@ export const Signin = ({ errorFromUrl }: { errorFromUrl?: string }) => {
         const result = await signIn("credentials", {
           email,
           password,
-          callbackUrl: `${window.location.href}/boards"}`,
+          callbackUrl: `${window.location.origin}/boards`,
           redirect: false,
         });
         if (result?.error) {

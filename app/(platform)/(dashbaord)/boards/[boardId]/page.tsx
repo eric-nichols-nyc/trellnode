@@ -72,7 +72,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   return (
     <div
       data-theme={getTheme()}
-      className="flex flex-row relative overflow-y-auto flex-1 bg-cover bg-center"
+      className="flex flex-row relative overflow-y-auto flex-1 min-h-screen bg-cover bg-center bg-fixed"
       style={{ backgroundImage: board?.imageFullUrl ? `url(${board.imageFullUrl})` : undefined, color: getTheme() === 'light' ? 'black' : 'white' }}
     >
     <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90">
