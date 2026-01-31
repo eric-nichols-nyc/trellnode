@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
@@ -10,7 +10,12 @@ import { toast } from "sonner";
 
 const CALLBACK_URL = "/boards";
 
-export const Signin = () => {
+export const Signin = ({ errorFromUrl }: { errorFromUrl?: string }) => {
+  useEffect(() => {
+    if (errorFromUrl) {
+      toast.error("Invalid email or password.");
+    }
+  }, [errorFromUrl]);
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
