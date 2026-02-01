@@ -37,34 +37,40 @@ export const BoardDndList = ({ list, index }: BoardDndListProps) => {
         >
           <div
             {...provided.dragHandleProps}
-            className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2 border-[5px] border-red-500"
+            className="flex flex-col w-full h-full max-h-full rounded-md bg-[#f1f2f4] shadow-md pb-2 border-[5px] border-red-500"
           >
-            <ListHeader data={list} />
-            <Droppable droppableId={id} type="card">
-              {(provided, snapshot) => (
-                <ol
-                  className="px-2 mt-2"
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {cards?.map((card: Card, index: number) => (
-                    <ListCard
-                      card={card}
-                      key={card.id}
-                      index={index}
-                      boardId={boardId}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </ol>
-              )}
-            </Droppable>
-            <AddForm
-              action={onAddCardSubmitHandler}
-              btnText="Add a card"
-              placeholder="Enter a title for this card..."
-              submitTxt="Add Card"
-            />
+            <div className="shrink-0">
+              <ListHeader data={list} />
+            </div>
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <Droppable droppableId={id} type="card">
+                {(provided, snapshot) => (
+                  <ol
+                    className="px-2 mt-2"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {cards?.map((card: Card, index: number) => (
+                      <ListCard
+                        card={card}
+                        key={card.id}
+                        index={index}
+                        boardId={boardId}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </ol>
+                )}
+              </Droppable>
+            </div>
+            <div className="shrink-0">
+              <AddForm
+                action={onAddCardSubmitHandler}
+                btnText="Add a card"
+                placeholder="Enter a title for this card..."
+                submitTxt="Add Card"
+              />
+            </div>
           </div>
         </li>
       )}
