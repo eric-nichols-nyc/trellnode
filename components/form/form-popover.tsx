@@ -15,6 +15,7 @@ import { CreateBoardForm } from "./createboardform/create-board-form";
     side?: "left" | "right" | "top" | "bottom";
     align?: "start" | "center" | "end";
     sideOffset?: number;
+    defaultOpen?: boolean;
   };
 
   export const FormPopover = ({
@@ -22,6 +23,7 @@ import { CreateBoardForm } from "./createboardform/create-board-form";
     side = "bottom",
     align,
     sideOffset = 0,
+    defaultOpen,
   }: FormPopoverProps) => {  
     const closeRef = useRef<ElementRef<"button">>(null);
 
@@ -30,7 +32,7 @@ import { CreateBoardForm } from "./createboardform/create-board-form";
     }
 
     return (
-    <Popover>
+    <Popover defaultOpen={defaultOpen}>
      <PopoverTrigger asChild>
         {children}
       </PopoverTrigger>

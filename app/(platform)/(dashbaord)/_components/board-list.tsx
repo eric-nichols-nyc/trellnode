@@ -2,8 +2,26 @@
 
 import Link from "next/link";
 import { UserRound } from "lucide-react";
-import { FormPopover } from "@/components/form/form-popover";
+//import { FormPopover } from "@/components/form/form-popover";
+import dynamic from "next/dynamic";
 
+const FormPopover = dynamic(
+  () =>
+    import("@/components/form/form-popover").then((m) => ({
+      default: m.FormPopover,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="aspect-video w-full rounded-sm bg-muted animate-pulse flex flex-col gap-y-1 items-center justify-center"
+        aria-hidden
+      >
+        <p className="text-sm text-muted-foreground">Loading…</p>
+      </div>
+    ),
+  }
+);
 type BoardListProps = {
   boards: any;
 };
