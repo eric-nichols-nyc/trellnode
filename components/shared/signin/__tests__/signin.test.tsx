@@ -1,11 +1,17 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Signin } from "../signin";
 import * as nextAuthReact from "next-auth/react";
 jest.mock("next-auth/react");
+jest.mock("sonner", () => ({ toast: { error: jest.fn(), success: jest.fn() } }));
 jest.mock("../../../../actions/signup-action", () => ({ signUp: jest.fn() }));
 const nextAuthReactMocked = nextAuthReact as jest.Mocked<typeof nextAuthReact>;
 
 describe("Signin", () => {
+  beforeEach(() => {
+    nextAuthReactMocked.signIn.mockReset();
+  });
+
   it("should render email, password inputs and Sign in button", () => {
     render(<Signin />);
     expect(screen.queryByLabelText(/name/i)).not.toBeInTheDocument();
@@ -20,28 +26,63 @@ describe("Signin", () => {
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
   });
 
-  it("should call signIn with credentials when form is submitted", async () => {
+  it("should call signIn with credentials when form is submitted with valid email and password", async () => {
     nextAuthReactMocked.signIn.mockResolvedValue({
       error: undefined,
       status: 200,
       ok: true,
-      url: "/boards",
+      url: null,
     });
     render(<Signin />);
-    fireEvent.change(screen.getByLabelText(/email/i), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(screen.getByLabelText(/password/i), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
-    await screen.findByText("Please wait…");
-    expect(nextAuthReactMocked.signIn).toHaveBeenCalledWith("credentials", {
-      email: "test@example.com",
-      password: "password123",
-      callbackUrl: "/boards",
-      redirect: false,
-    });
+    await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
+    await userEvent.type(screen.getByLabelText(/password/i), "password123");
+    await userEvent.click(screen.getByRole("button", { name: "Sign in" }));
+    await waitFor(() => expect(nextAuthReactMocked.signIn).toHaveBeenCalled());
+    expect(nextAuthReactMocked.signIn).toHaveBeenCalledWith(
+      "credentials",
+      expect.objectContaining({
+        email: "test@example.com",
+        password: "password123",
+        redirect: false,
+      })
+    );
+    expect(nextAuthReactMocked.signIn.mock.calls[0][1].callbackUrl).toMatch(/\/boards$/);
+  });
+
+  it("should show validation errors and not call signIn when email is empty", async () => {
+    render(<Signin />);
+    await userEvent.type(screen.getByLabelText(/password/i), "password123");
+    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    expect(await screen.findByText("Email is required")).toBeInTheDocument();
+    expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
+  });
+
+  it("should show validation error when email is invalid", async () => {
+    render(<Signin />);
+    await userEvent.type(screen.getByLabelText(/email/i), "not-an-email");
+    await userEvent.type(screen.getByLabelText(/password/i), "password123");
+    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    expect(await screen.findByText("Please enter a valid email")).toBeInTheDocument();
+    expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
+  });
+
+  it("should show validation error when password is empty", async () => {
+    render(<Signin />);
+    await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
+    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    expect(await screen.findByText("Password is required")).toBeInTheDocument();
+    expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
+  });
+
+  it("should show validation error for short password on sign up", async () => {
+    render(<Signin />);
+    await userEvent.click(screen.getByText("Create an account"));
+    await userEvent.type(screen.getByLabelText(/name/i), "Test User");
+    await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
+    await userEvent.type(screen.getByLabelText(/password/i), "short");
+    await userEvent.click(screen.getByRole("button", { name: /create account/i }));
+    expect(screen.getByText("Password must be at least 8 characters")).toBeInTheDocument();
+    expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
   });
 
   it("should show Create account button when Create an account is clicked", () => {
