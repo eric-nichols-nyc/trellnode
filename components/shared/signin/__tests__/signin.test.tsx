@@ -52,7 +52,7 @@ describe("Signin", () => {
   it("should show validation errors and not call signIn when email is empty", async () => {
     render(<Signin />);
     await userEvent.type(screen.getByLabelText(/password/i), "password123");
-    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    fireEvent.submit(screen.getByTestId("signin-form"));
     expect(await screen.findByText("Email is required")).toBeInTheDocument();
     expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
   });
@@ -61,7 +61,7 @@ describe("Signin", () => {
     render(<Signin />);
     await userEvent.type(screen.getByLabelText(/email/i), "not-an-email");
     await userEvent.type(screen.getByLabelText(/password/i), "password123");
-    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    fireEvent.submit(screen.getByTestId("signin-form"));
     expect(await screen.findByText("Please enter a valid email")).toBeInTheDocument();
     expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
   });
@@ -69,7 +69,7 @@ describe("Signin", () => {
   it("should show validation error when password is empty", async () => {
     render(<Signin />);
     await userEvent.type(screen.getByLabelText(/email/i), "test@example.com");
-    fireEvent.submit(screen.getByRole("button", { name: "Sign in" }).closest("form")!);
+    fireEvent.submit(screen.getByTestId("signin-form"));
     expect(await screen.findByText("Password is required")).toBeInTheDocument();
     expect(nextAuthReactMocked.signIn).not.toHaveBeenCalled();
   });

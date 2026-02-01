@@ -114,7 +114,7 @@ export const Signin = ({ errorFromUrl }: { errorFromUrl?: string }) => {
       <h1 className="mb-4 text-center text-lg font-semibold">
         {isSignUp ? "Sign up" : "Sign in"}
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <form data-testid="signin-form" onSubmit={handleSubmit} className="flex flex-col gap-3">
         {isSignUp && (
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
