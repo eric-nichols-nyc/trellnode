@@ -7,6 +7,7 @@ import { compare } from "bcryptjs";
 import { createDefaultBoardForUser } from "@/lib/create-default-board";
 
 export const options: AuthOptions = {
+    trustHost: true,
     pages: {
         signIn: "/signin",
     },
