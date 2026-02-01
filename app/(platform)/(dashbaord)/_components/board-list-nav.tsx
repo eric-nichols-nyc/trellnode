@@ -6,8 +6,17 @@ import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import {BoardDndListItem} from "./list-item";
 import { ClipboardList, Plus } from "lucide-react";
-import { FormPopover } from "@/components/form/form-popover";
 import Link from "next/link";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const FormPopover = dynamic(
+  () =>
+    import("@/components/form/form-popover").then((m) => ({
+      default: m.FormPopover,
+    })),
+  { ssr: false }
+);
 
 export const BoardListNav = async () => {
   const session = await getServerSession(options);
@@ -45,9 +54,11 @@ export const BoardListNav = async () => {
         <div>
           <div className="text-sm font-semibold">Your boards</div>
         </div>
-        <FormPopover>
-          <Plus size={32} className="p-2 cursor-pointer hover:bg-slate-200" />
-        </FormPopover>
+        <Suspense fallback={<Plus size={32} className="p-2 cursor-pointer hover:bg-slate-200 opacity-50" />}>
+          <FormPopover>
+            <Plus size={32} className="p-2 cursor-pointer hover:bg-slate-200" />
+          </FormPopover>
+        </Suspense>
       </div>
       {boards?.map((board: Board) => (
         <BoardDndListItem key={board.id} board={board} />

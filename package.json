@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
+    "analyze:serve": "npx serve .next/analyze -p 3001",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",

@@ -1,17 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import {
-  Popover,
-  PopoverClose,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { useRouter } from "next/navigation";
-import { createBoard } from "@/actions/create-board-action";
-import { ElementRef, useRef, useState } from "react";
-import { UserRound, X } from "lucide-react";
+import { UserRound } from "lucide-react";
 import { FormPopover } from "@/components/form/form-popover";
 
 type BoardListProps = {
@@ -19,9 +9,6 @@ type BoardListProps = {
 };
 
 export const AllBoardsList = ({ boards }: BoardListProps) => {
-  const router = useRouter();
-  const closeRef = useRef<ElementRef<"button">>(null);
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   return (
     <div className="boards-page-board-section-list w-full margin m-auto p-8">
