@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/lib/db";
 import { Board, User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import prisma  from "@/prisma";
+import { prisma } from "@/prisma";
 import { NavSearchBarForm } from "./navsearchbar-form";
 
 async function getBoards() {
