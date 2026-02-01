@@ -37,7 +37,7 @@ export const BoardDndList = ({ list, index }: BoardDndListProps) => {
         >
           <div
             {...provided.dragHandleProps}
-            className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2"
+            className="w-full rounded-md bg-[#f1f2f4] shadow-md pb-2 border-[5px] border-red-500"
           >
             <ListHeader data={list} />
             <Droppable droppableId={id} type="card">
