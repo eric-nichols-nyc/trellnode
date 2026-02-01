@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { connectToDatabase } from "@/lib/db";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { AllBoardsList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";

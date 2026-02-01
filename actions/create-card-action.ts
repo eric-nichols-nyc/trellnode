@@ -4,7 +4,7 @@ import { connectToDatabase } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { prisma } from "@/prisma";
+import prisma  from "@/prisma";
 import { revalidatePath } from "next/cache";
 /**
  * 1. define a server component

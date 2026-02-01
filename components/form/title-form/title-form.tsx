@@ -10,13 +10,7 @@ type TitleFormProps = {
   update: (id:string, title:string) => void
 };
 
-/**
- *
- * create refs
- * add state for title change and isEditagle
- * call submit
- * @returns
- */
+// form for the top of the list
 export const TitleForm = ({ title, id, update }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const formRef = useRef<ElementRef<"form">>(null);
@@ -36,6 +30,7 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
   };
 
   const enableEditing = () => {
+    console.log('temporarily disabled..')
     setIsEditing(true);
     setTimeout(() => {
       inputRef.current?.focus();
@@ -47,10 +42,12 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
     return (
       <form action={onSubmit} ref={formRef} className="text-black">
         <Input
+          className="text-black"
           ref={inputRef}
           onBlur={handleOnBlur}
           defaultValue={title}
           name="title"
+          id="board-list-title"
         />
       </form>
     );

@@ -72,18 +72,18 @@ export const options: AuthOptions = {
             if (url.startsWith(baseUrl)) return url;
             return baseUrl;
         },
-        async jwt({token, user, account, profile}) {
+        async jwt({ token, user, account, profile }) {
             // console.log('profile ',profile)
             if (user) {
-            // console.log('user id = ', user)
-            return {
-                ...token,
-                id: user.id,
+                // console.log('user id = ', user)
+                return {
+                    ...token,
+                    id: user.id,
+                }
             }
-          }
-          return token
+            return token
         },
-        async session({session, token, user}) {
+        async session({ session, token, user }) {
             // console.log(session);
             return {
                 ...session,
