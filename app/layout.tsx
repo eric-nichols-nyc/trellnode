@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={plusJakarta.variable}>
-      <body className={inter.className}>
+    <html lang="en" className={`${plusJakarta.variable} h-full`}>
+      <body className={`${inter.className} h-full`}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

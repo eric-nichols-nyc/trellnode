@@ -48,7 +48,12 @@ export const BoardDndList = ({ list, index }: BoardDndListProps) => {
                   {...provided.droppableProps}
                 >
                   {cards?.map((card: Card, index: number) => (
-                    <ListCard card={card} key={card.id} index={index} />
+                    <ListCard
+                      card={card}
+                      key={card.id}
+                      index={index}
+                      boardId={boardId}
+                    />
                   ))}
                   {provided.placeholder}
                 </ol>

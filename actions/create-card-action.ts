@@ -21,7 +21,7 @@ import { revalidatePath } from "next/cache";
  **/
 
 const createCardSchema = z.object({
-  title: z.string(),
+  title: z.string().min(1, "Title is required"),
   listId: z.string(),
   boardId: z.string(),
   order: z.number(),

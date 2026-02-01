@@ -31,13 +31,13 @@ export const AddListForm = ({boardId}:AddListProps) => {
   if (isEditing) {
     return (
       <div className="">
-        <form data-testid="form" role="form" aria-labelledby="form" action={onSubmit} className="w-full p-3 rounded-md bg-white space-y-4 shadow-md">
+        <form data-testid="form" role="form" aria-labelledby="form" action={onSubmit} className="w-full p-3 rounded-md bg-white text-black space-y-4 shadow-md">
          <Input role="textbox" placeholder="Enter list title..." name="title" className="w-full h-10 text-black" />
           <div className="flex gap-2 justify-center items-center">
-            <Button className="w-full h-10 bg-[#5aac44] text-white rounded-md">
+            <Button className="w-full h-10 bg-gray-200 text-black rounded-md">
               Add List
             </Button>
-              <X 
+              <X
               className="cursor-pointer"
               color="#5e6c84"
                onClick={() => setIsEditing(false)}
@@ -48,8 +48,8 @@ export const AddListForm = ({boardId}:AddListProps) => {
     );
   }
   return (
-      <Button 
-      role="button" 
+      <Button
+      role="button"
       name="add-list-button"
       onClick={() => setIsEditing(true)}
       className="text-black shrink-0 w-[272px] h-[44px] bg-[#f1f2f4] hover:bg-[#f1f2f4]/70 shadow-md rounded-md flex justify-start">

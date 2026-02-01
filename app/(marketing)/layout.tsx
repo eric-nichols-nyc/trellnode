@@ -11,7 +11,7 @@ export default function MarketingLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen font-display bg-gradient-to-b from-amber-50/80 via-stone-50 to-white">
+    <div className="h-full min-h-screen font-display bg-gradient-to-b from-amber-50/80 via-stone-50 to-white overflow-y-auto overflow-x-hidden">
       <Navbar />
       <main className="pt-14">{children}</main>
     </div>

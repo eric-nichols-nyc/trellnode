@@ -13,9 +13,13 @@ type AddFormProps = {
 
 export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
-  function onSubmit(formData: FormData) {
-    // create list
-    action(formData as unknown as FormData);
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    action(formData);
+    formRef.current?.reset();
+    setIsEditing(false);
   }
 
   const [isEditing, setIsEditing] = useState(false);
@@ -25,7 +29,7 @@ export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProp
       <div className="shrink-0 w-[272px] rounded-md">
         <form
           ref={formRef}
-          action={onSubmit}
+          onSubmit={onSubmit}
           className="w-full p-3 rounded-md bg-white space-y-4 shadow-md"
         >
           <Input placeholder={placeholder} className="w-full h-10 text-black" id="title" name="title"/>

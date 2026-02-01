@@ -8,8 +8,8 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <div className="h-full flex flex-col">
-        <div className="flex flex-col grow">
+      <div className="w-full h-full min-h-screen flex flex-col overflow-hidden border-[5px] border-green-500">
+        <div className="w-full h-full flex flex-col grow overflow-hidden min-h-0">
         <Navbar />
         <Toaster />
           {children}

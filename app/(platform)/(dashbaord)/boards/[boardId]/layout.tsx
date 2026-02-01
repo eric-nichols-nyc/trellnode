@@ -10,9 +10,9 @@ export default function BoardsIdLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex h-full">
-        <main className="relative overflow-y-auto flex flex-col flex-grow-1 w-full">
+    <div className="flex flex-col w-full h-full min-h-0">
+      <div className="flex w-full h-full min-h-0">
+        <main className="relative overflow-hidden flex flex-col flex-1 w-full min-h-0">
           <TProvider>{children}</TProvider>
         </main>
       </div>

@@ -45,7 +45,7 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
 
   if (isEditing) {
     return (
-      <form action={onSubmit} ref={formRef}>
+      <form action={onSubmit} ref={formRef} className="text-black">
         <Input
           ref={inputRef}
           onBlur={handleOnBlur}
@@ -56,8 +56,8 @@ export const TitleForm = ({ title, id, update }: TitleFormProps) => {
     );
   }
   return (
-    <Button 
-    className="h-[44px] text-sm"
+    <Button
+    className="h-[44px] text-sm text-black"
     onClick={enableEditing} variant="ghost">
       {title}
     </Button>

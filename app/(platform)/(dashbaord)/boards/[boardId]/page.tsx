@@ -72,15 +72,18 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   return (
     <div
       data-theme={getTheme()}
-      className="flex flex-row relative overflow-y-auto flex-1 min-h-screen bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: board?.imageFullUrl ? `url(${board.imageFullUrl})` : undefined, color: getTheme() === 'light' ? 'black' : 'white' }}
+      className="flex flex-row relative overflow-hidden flex-1 min-h-0 w-full h-full bg-cover bg-center bg-fixed"
+      style={{
+        backgroundImage: board?.imageFullUrl ? `url(${board.imageFullUrl})` : undefined,
+        color: getTheme() === "light" ? "black" : "white",
+      }}
     >
-    <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90">
+    <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90 shrink-0">
       <Sidenav />
     </div>
-      <div className="flex flex-col overflow-y-auto flex-1">
-        <div className="grow relative overflow-y-auto">
-          <BoardHeader board={board} />
+      <div className="flex flex-col flex-1 min-h-0 overflow-hidden border-[5px] border-red-500">
+        <BoardHeader board={board} />
+        <div className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden">
           <BoardDndLists board={board} />
         </div>
       </div>

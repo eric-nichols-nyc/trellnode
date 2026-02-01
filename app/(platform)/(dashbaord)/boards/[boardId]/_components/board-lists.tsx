@@ -36,9 +36,9 @@ export const BoardDndLists = async ({ board }: BoardDndListsProps) => {
   const lists = await getBoardDndLists(board.id);
   // create catch for lists errors
   return (
-    <div className="pt-20 h-full">
-      <div className="gap-3 h-full">
-        <div className="h-full overflow-x-auto p-4 ">
+    <div className="pt-14 h-full min-h-0">
+      <div className="flex gap-3 h-full min-h-0">
+        <div className="h-full min-h-0 overflow-x-auto overflow-y-hidden p-4">
           {
             lists && (  <BoardDnD lists={lists} boardId={board.id} />)
           }

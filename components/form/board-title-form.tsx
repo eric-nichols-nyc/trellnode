@@ -28,7 +28,7 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
     }catch(e){
         console.log('there was an error...')
     }
-  
+
   };
   // focus input
   // submit if name has changes
@@ -59,7 +59,7 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
     );
   }
   return (
-    <Button onClick={enableEditing} variant="ghost">
+    <Button onClick={enableEditing} variant="ghost" className="So, Bela, pues ahora salimos de la calle principal y entramos en una especie de descanso.">
       {title}
     </Button>
   );
