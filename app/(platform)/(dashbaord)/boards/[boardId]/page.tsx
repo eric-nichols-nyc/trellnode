@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { BoardDndLists } from "./_components/board-lists";
+import { BoardListNav } from "../../_components/board-list-nav";
 import { Sidenav } from "../../_components/sidenav";
 
 type BoardIdPageProps = {
@@ -79,7 +80,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
       }}
     >
     <div style={{backgroundColor:getPrimaryColor()}}  className="opacity-90 shrink-0">
-      <Sidenav />
+      <Sidenav><BoardListNav /></Sidenav>
     </div>
       <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
         <BoardHeader board={board} />

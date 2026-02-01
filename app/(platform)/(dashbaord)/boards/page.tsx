@@ -6,6 +6,7 @@ import { AllBoardsList } from "../_components/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { Logo } from "@/components/shared/logo";
+import { BoardListNav } from "../_components/board-list-nav";
 import { Sidenav } from "../_components/sidenav";
 
 const Boardspage = async () => {
@@ -39,7 +40,7 @@ const Boardspage = async () => {
 
   return (
     <div className="boards-page-container w-full flex justify-center">
-      <Sidenav />
+      <Sidenav><BoardListNav /></Sidenav>
       <div className="all-boards flex flex-col w-full max-w-4xl">
         <div className="flex items-center justify-center font-semibold h-[124px]">
           <div className="w-full px-3 flex gap-2 items-center">
