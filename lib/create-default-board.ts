@@ -35,7 +35,7 @@ const DEFAULT_CARD_IMAGE_URLS = [
   "https://4jhrlg6rm1.ufs.sh/f/U6YzDNnXqiW9W1hNdc68f3xVgk1L7MNolzTYnFywrGJZcvHj",
   "https://4jhrlg6rm1.ufs.sh/f/U6YzDNnXqiW9SsBpvGOPkgLnJWO4bG8yslpEV9Ah7oidazrU",
   "https://4jhrlg6rm1.ufs.sh/f/U6YzDNnXqiW9SqHYAfOPkgLnJWO4bG8yslpEV9Ah7oidazrU",
-  "https://4jhrlg6rm1.ufs.sh/f/U6YzDNnXqiW9SqHYAfOPkgLnJWO4bG8yslpEV9Ah7oidazrU",
+  "https://4jhrlg6rm1.ufs.sh/f/U6YzDNnXqiW9TFakMB1yCprJGFWl6sg0Zi91DzSa2xtuMBQh",
 ] as const;
 
 /**
