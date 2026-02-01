@@ -34,7 +34,7 @@ export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProp
         >
           <Input placeholder={placeholder} className="w-full h-10 text-black" id="title" name="title"/>
           <div className="flex gap-2 justify-center items-center">
-            <Button className="w-full h-10 bg-[#5aac44] text-white rounded-md">
+            <Button className="w-full h-10 bg-transparent text-black rounded-md">
               {submitTxt}
             </Button>
             <X

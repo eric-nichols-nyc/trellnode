@@ -6,8 +6,6 @@ import React, { ElementRef, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { updateCard } from "@/actions/update-card-action";
 
-const PLACEHOLDER_IMAGE = "/images/photo-1446511437394-36cdff3ae1b3.jpg";
-
 type CardWithImage = Card & { imageUrl?: string | null };
 
 type ListCardProps = {
@@ -18,7 +16,6 @@ type ListCardProps = {
 
 export const ListCard = ({ card, index, boardId }: ListCardProps) => {
   const { title, imageUrl } = card;
-  const imageSrc = imageUrl || PLACEHOLDER_IMAGE;
   const [isEditing, setIsEditing] = useState(false);
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
@@ -58,16 +55,18 @@ export const ListCard = ({ card, index, boardId }: ListCardProps) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className="relative aspect-video w-full overflow-hidden">
-            <Image
-              src={imageSrc}
-              alt={title}
-              fill
-              className="object-cover"
-              sizes="272px"
-              unoptimized
-            />
-          </div>
+          {imageUrl && (
+            <div className="relative aspect-video w-full overflow-hidden">
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className="object-cover"
+                sizes="272px"
+                unoptimized
+              />
+            </div>
+          )}
           <div className="px-3 py-2">
             {isEditing ? (
               <form onSubmit={onSubmit} ref={formRef}>
