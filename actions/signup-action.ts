@@ -3,6 +3,7 @@
 import { hash } from "bcryptjs";
 import { prisma } from "@/prisma";
 import { connectToDatabase } from "@/lib/db";
+import { createDefaultBoardForUser } from "@/lib/create-default-board";
 
 export async function signUp(email: string, password: string, name: string) {
   if (!email?.trim() || !password?.trim() || !name?.trim()) {
@@ -20,13 +21,14 @@ export async function signUp(email: string, password: string, name: string) {
       return { error: "An account with this email already exists." };
     }
     const hashedPassword = await hash(password, 12);
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         email: email.trim().toLowerCase(),
         name: name.trim(),
         hashedPassword,
       },
     });
+    await createDefaultBoardForUser(newUser.id);
     return { success: true };
   } catch (e) {
     console.error(e);

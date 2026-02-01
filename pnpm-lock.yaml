@@ -38,9 +38,6 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.2.4(@types/react@18.3.27)(react@18.3.1)
-      '@types/jest':
-        specifier: ^29.5.12
-        version: 29.5.14
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
@@ -59,12 +56,6 @@ importers:
       d:
         specifier: ^1.0.1
         version: 1.0.2
-      eslint-plugin-jest-dom:
-        specifier: ^5.1.0
-        version: 5.5.0(@testing-library/dom@9.3.4)(eslint@8.57.1)
-      eslint-plugin-testing-library:
-        specifier: ^6.2.0
-        version: 6.5.0(eslint@8.57.1)(typescript@5.9.3)
       lucide-react:
         specifier: ^0.298.0
         version: 0.298.0(react@18.3.1)
@@ -92,18 +83,12 @@ importers:
       react-icons:
         specifier: ^4.12.0
         version: 4.12.0(react@18.3.1)
-      sonnar:
-        specifier: ^1.0.0
-        version: 1.0.0
       sonner:
         specifier: ^1.4.0
         version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: ^2.2.0
         version: 2.6.1
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.19)
       unsplash-js:
         specifier: ^7.0.19
         version: 7.0.20
@@ -135,6 +120,9 @@ importers:
       '@types/bcryptjs':
         specifier: ^2.4.6
         version: 2.4.6
+      '@types/jest':
+        specifier: ^29.5.12
+        version: 29.5.14
       '@types/node':
         specifier: ^20
         version: 20.19.30
@@ -159,6 +147,12 @@ importers:
       eslint-config-next:
         specifier: 14.0.4
         version: 14.0.4(eslint@8.57.1)(typescript@5.9.3)
+      eslint-plugin-jest-dom:
+        specifier: ^5.1.0
+        version: 5.5.0(@testing-library/dom@9.3.4)(eslint@8.57.1)
+      eslint-plugin-testing-library:
+        specifier: ^6.2.0
+        version: 6.5.0(eslint@8.57.1)(typescript@5.9.3)
       jest:
         specifier: ^29.6.4
         version: 29.7.0(@types/node@20.19.30)
@@ -183,6 +177,9 @@ importers:
       tailwindcss:
         specifier: ^3.3.0
         version: 3.4.19
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.19)
       ts-jest:
         specifier: ^29.1.2
         version: 29.4.6(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@20.19.30))(typescript@5.9.3)
@@ -3964,9 +3961,6 @@ packages:
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
-
-  sonnar@1.0.0:
-    resolution: {integrity: sha512-pv2qlVkbmy2tfA0e2m9SrUdW/B6t+Nb6XR/f4WJq7TC+cLu1mhmv/qhMeZnePIJWMpB7cl0WTRAxQTlUJm+kmg==}
 
   sonner@1.7.4:
     resolution: {integrity: sha512-DIS8z4PfJRbIyfVFDVnK9rO3eYDtse4Omcm6bt0oEr5/jtLgysmjuBl1frJ9E/EQZrFmKx2A8m/s5s9CRXIzhw==}
@@ -8867,8 +8861,6 @@ snapshots:
   sisteransi@1.0.5: {}
 
   slash@3.0.0: {}
-
-  sonnar@1.0.0: {}
 
   sonner@1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:

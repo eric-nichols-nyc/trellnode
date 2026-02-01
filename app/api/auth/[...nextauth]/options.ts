@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDatabase } from "@/lib/db";
 import { compare } from "bcryptjs";
+import { createDefaultBoardForUser } from "@/lib/create-default-board";
 
 export const options: AuthOptions = {
     pages: {
@@ -51,13 +52,14 @@ export const options: AuthOptions = {
                     where: { email },
                 });
                 if (!existingUser) {
-                    await prisma.user.create({
+                    const newUser = await prisma.user.create({
                         data: {
                             email,
                             name: user.name ?? email.split("@")[0],
                             image: user.image ?? null,
                         },
                     });
+                    await createDefaultBoardForUser(newUser.id);
                 }
                 return true;
             } catch (error) {
