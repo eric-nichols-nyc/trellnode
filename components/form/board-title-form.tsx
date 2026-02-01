@@ -59,7 +59,7 @@ export const BoardTitleForm = ({ title, id }: BoardTitleFormProps) => {
     );
   }
   return (
-    <Button onClick={enableEditing} variant="ghost" className="So, Bela, pues ahora salimos de la calle principal y entramos en una especie de descanso.">
+    <Button onClick={enableEditing} variant="ghost" className="text-bold text-lg">
       {title}
     </Button>
   );
