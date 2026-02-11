@@ -2,6 +2,7 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { Card } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 import React, { ElementRef, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { updateCard } from "@/actions/update-card-action";
@@ -53,41 +54,66 @@ export const ListCard = ({ card, index, boardId }: ListCardProps) => {
           className="rounded-md bg-white text-black shadow-md mb-2 text-sm overflow-hidden"
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
         >
-          {imageUrl && (
-            <div className="relative aspect-video w-full overflow-hidden">
-              <Image
-                src={imageUrl}
-                alt={title}
-                fill
-                className="object-cover"
-                sizes="272px"
-                unoptimized
-              />
+          {isEditing ? (
+            <div className="block" {...provided.dragHandleProps}>
+              {imageUrl && (
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <Image
+                    src={imageUrl}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="272px"
+                    unoptimized
+                  />
+                </div>
+              )}
+              <div className="px-3 py-2">
+                <form onSubmit={onSubmit} ref={formRef}>
+                  <Input
+                    ref={inputRef}
+                    name="title"
+                    defaultValue={title}
+                    onBlur={handleBlur}
+                    className="h-8 text-sm border-none shadow-none focus-visible:ring-0 px-0"
+                  />
+                </form>
+              </div>
             </div>
+          ) : (
+            <Link
+              href={`/boards/${boardId}/card/${card.id}`}
+              className="block"
+              {...provided.dragHandleProps}
+            >
+              {imageUrl && (
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <Image
+                    src={imageUrl}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="272px"
+                    unoptimized
+                  />
+                </div>
+              )}
+              <div className="px-3 py-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    enableEditing();
+                  }}
+                  className="w-full text-left min-h-[32px] hover:bg-black/5 rounded px-0 -mx-0"
+                >
+                  {title || "Add a title..."}
+                </button>
+              </div>
+            </Link>
           )}
-          <div className="px-3 py-2">
-            {isEditing ? (
-              <form onSubmit={onSubmit} ref={formRef}>
-                <Input
-                  ref={inputRef}
-                  name="title"
-                  defaultValue={title}
-                  onBlur={handleBlur}
-                  className="h-8 text-sm border-none shadow-none focus-visible:ring-0 px-0"
-                />
-              </form>
-            ) : (
-              <button
-                type="button"
-                onClick={enableEditing}
-                className="w-full text-left min-h-[32px] hover:bg-black/5 rounded px-0 -mx-0"
-              >
-                {title || "Add a title..."}
-              </button>
-            )}
-          </div>
         </li>
       )}
     </Draggable>
