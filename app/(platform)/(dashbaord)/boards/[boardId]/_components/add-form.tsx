@@ -1,7 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState, useRef } from "react";
+import { useClickOutside } from "@/hooks/useClickOutside";
+import { useState, useRef, useEffect } from "react";
 import { Plus, X } from "lucide-react";
 
 type AddFormProps = {
@@ -13,6 +14,8 @@ type AddFormProps = {
 
 export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,15 +27,23 @@ export const AddForm = ({ action, btnText, placeholder, submitTxt }: AddFormProp
 
   const [isEditing, setIsEditing] = useState(false);
 
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current?.focus();
+    }
+  }, [isEditing]);
+
+  useClickOutside(wrapperRef, () => setIsEditing(false), isEditing);
+
   if (isEditing) {
     return (
-      <div className="shrink-0 w-[272px] rounded-md">
+      <div ref={wrapperRef} className="shrink-0 w-[272px] rounded-md">
         <form
           ref={formRef}
           onSubmit={onSubmit}
           className="w-full p-3 rounded-md bg-white space-y-4 shadow-md"
         >
-          <Input placeholder={placeholder} className="w-full h-10 text-black" id="title" name="title"/>
+          <Input ref={inputRef} placeholder={placeholder} className="w-full h-10 text-black" id="title" name="title"/>
           <div className="flex gap-2 justify-center items-center">
             <Button className="w-full h-10 bg-transparent text-black rounded-md">
               {submitTxt}
