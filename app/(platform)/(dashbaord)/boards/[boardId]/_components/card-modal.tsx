@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * Card modal: full card details in a dialog (title, image, description).
+ * - Title is inline-editable; description uses TinyMCE and can be viewed or edited.
+ * - Positioned near the top of the viewport; closes via backdrop click or close button.
+ */
+
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -11,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { updateCard } from "@/actions/update-card-action";
 
+// TinyMCE loads only on client to avoid SSR/document issues
 const TinyMCEEditor = dynamic(
   () =>
     import("@tinymce/tinymce-react").then(
@@ -28,18 +35,22 @@ type CardModalProps = {
 
 export function CardModal({ card, children }: CardModalProps) {
   const router = useRouter();
+
+  // Title editing (inline)
   const [title, setTitle] = useState(card.title);
-  // Description is stored and edited as HTML from TinyMCE
-  const [description, setDescription] = useState(
-    typeof card.description === "string" ? card.description : ""
-  );
   const [isEditing, setIsEditing] = useState(false);
-  const [isSavingDescription, setIsSavingDescription] = useState(false);
-  const [descriptionError, setDescriptionError] = useState<string | null>(null);
-  const [isEditingDescription, setIsEditingDescription] = useState(false);
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
 
+  // Description: stored as HTML from TinyMCE; view vs edit mode
+  const [description, setDescription] = useState(
+    typeof card.description === "string" ? card.description : ""
+  );
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [isSavingDescription, setIsSavingDescription] = useState(false);
+  const [descriptionError, setDescriptionError] = useState<string | null>(null);
+
+  /** True when description has real content (ignores empty tags like <p></p>) */
   const hasDescription =
     description.trim() !== "" &&
     description.replace(/<[^>]*>/g, "").trim() !== "";
@@ -47,6 +58,7 @@ export function CardModal({ card, children }: CardModalProps) {
   const boardId = card.list?.boardId;
   const handleClose = () => router.back();
 
+  /** Calls updateCard and handles success/error; returns true if saved successfully */
   const runUpdateCard = async (payload: {
     id: string;
     title: string;
@@ -76,6 +88,7 @@ export function CardModal({ card, children }: CardModalProps) {
     return false;
   };
 
+  /** Save description via button; on success switch back to view mode */
   const saveDescription = async () => {
     if (!boardId) return;
     setIsSavingDescription(true);
@@ -95,6 +108,7 @@ export function CardModal({ card, children }: CardModalProps) {
 
   const startEditingDescription = () => setIsEditingDescription(true);
 
+  /** Auto-save description when editor loses focus */
   const handleDescriptionBlur = async () => {
     if (!boardId) return;
     const result = await runUpdateCard({
@@ -109,6 +123,7 @@ export function CardModal({ card, children }: CardModalProps) {
     }
   };
 
+  /** Submit title form: persist new title and exit edit mode */
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsEditing(false);
@@ -134,6 +149,7 @@ export function CardModal({ card, children }: CardModalProps) {
     }
   };
 
+  /** On title input blur: submit if changed, else cancel edit */
   const handleBlur = () => {
     if (inputRef.current?.value?.trim() !== card.title) {
       formRef.current?.requestSubmit();
@@ -153,11 +169,13 @@ export function CardModal({ card, children }: CardModalProps) {
 
   return (
     <>
+      {/* Backdrop: click to close */}
       <div
         className="fixed inset-0 z-40 bg-black/50"
         onClick={handleClose}
         aria-hidden
       />
+      {/* Modal panel: top-aligned, scrollable if content is long */}
       <div
         className="fixed left-1/2 top-8 z-50 w-full max-w-lg -translate-x-1/2 rounded-lg bg-white p-4 text-black shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto"
         role="dialog"
@@ -223,6 +241,7 @@ export function CardModal({ card, children }: CardModalProps) {
           <p className="text-xs font-medium text-stone-500 uppercase tracking-wide mb-1.5">
             Description
           </p>
+          {/* Edit mode: TinyMCE + Save */}
           {isEditingDescription ? (
             <>
               <TinyMCEEditor
@@ -256,6 +275,7 @@ export function CardModal({ card, children }: CardModalProps) {
             </>
           ) : hasDescription ? (
             <>
+              {/* View mode: rendered HTML + Edit button */}
               <div
                 className="rounded-md border border-stone-200 bg-stone-50/50 p-3 text-sm text-stone-700 prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1"
                 dangerouslySetInnerHTML={{ __html: description }}
@@ -272,16 +292,19 @@ export function CardModal({ card, children }: CardModalProps) {
               </Button>
             </>
           ) : (
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="w-full justify-start text-stone-500 hover:text-stone-700"
-              onClick={startEditingDescription}
-            >
-              <Pencil className="size-4 mr-1.5" />
-              Add a more detailed description
-            </Button>
+            <>
+              {/* No description: prompt to add one */}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full justify-start text-stone-500 hover:text-stone-700"
+                onClick={startEditingDescription}
+              >
+                <Pencil className="size-4 mr-1.5" />
+                Add a more detailed description
+              </Button>
+            </>
           )}
           {descriptionError && (
             <p className="mt-2 text-sm text-red-600" role="alert">
