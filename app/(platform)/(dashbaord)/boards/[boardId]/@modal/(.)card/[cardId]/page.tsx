@@ -3,7 +3,7 @@ import { prisma } from "@/prisma";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect, notFound } from "next/navigation";
-import { CardModal } from "../../../_components/card-modal";
+import { CardModal } from "../../../_components/cardmodal/card-modal";
 
 type PageProps = {
   params: Promise<{ cardId: string }>;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import TProvider from "@/components/providers/theme-provider";
-import { BottomNav } from "./_components/bottom-nav";
+import { BottomNav } from "./_components/boardview/bottom-nav";
 
 export const metadata: Metadata = {
   title: "Trellnode App",

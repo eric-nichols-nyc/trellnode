@@ -14,6 +14,7 @@ export const AddListForm = ({ boardId }: AddListProps) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   async function onSubmit(formData: FormData) {
+    alert('click 1')
     // create list
     const title = formData.get("title") as string;
     const order = 0;
@@ -29,7 +30,7 @@ export const AddListForm = ({ boardId }: AddListProps) => {
 
   if (isEditing) {
     return (
-      <div className="shrink-0 w-[272px] rounded-md">
+      <div className="shrink-0 w-[272px] rounded-md border border-red-300">
         <form
           ref={formRef}
           action={onSubmit}

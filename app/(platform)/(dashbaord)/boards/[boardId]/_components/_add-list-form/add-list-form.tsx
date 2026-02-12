@@ -11,7 +11,7 @@ import { createList } from "@/actions/create-list-action";
 
 export const AddListForm = ({boardId}:AddListProps) => {
     async function onSubmit(formData: FormData) {
-        console.log('I was called')
+      alert('click 2')
 
         // create list
         const title =  formData.get("title") as string;
@@ -30,7 +30,7 @@ export const AddListForm = ({boardId}:AddListProps) => {
   const [isEditing, setIsEditing] = useState(false);
   if (isEditing) {
     return (
-      <div className="">
+      <div className="border border-red-400">
         <form data-testid="form" role="form" aria-labelledby="form" action={onSubmit} className="w-full p-3 rounded-md bg-white text-black space-y-4 shadow-md">
          <Input role="textbox" placeholder="Enter list title..." name="title" className="w-full h-10 text-black" />
           <div className="flex gap-2 justify-center items-center">

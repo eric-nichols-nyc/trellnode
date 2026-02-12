@@ -1,7 +1,7 @@
 "use client";
 import { BoardTitleForm } from "@/components/form/board-title-form";
 import React from "react";
-import { BoardOptions } from "./board-options";
+import { BoardOptions } from "../boardoptions/board-options";
 import { Board } from "@prisma/client";
 
 type BoardHeaderProps = {

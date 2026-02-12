@@ -1,9 +1,9 @@
 "use client";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import { ListHeader } from "./list-header";
+import { ListHeader } from "../listheader/list-header";
 import { Card } from "@prisma/client";
-import { AddForm } from "./add-form";
-import { ListCard } from "./list-card";
+import { AddForm } from "../addform/add-form";
+import { ListCard } from "../listcard/list-card";
 import { createCard } from "@/actions/create-card-action";
 import { ListWithCards } from "@/types";
 

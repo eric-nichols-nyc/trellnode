@@ -9,7 +9,7 @@ import {
 } from "@hello-pangea/dnd";
 import { Card } from "@prisma/client";
 import { updateListOrder } from "@/actions/update-list-order-action";
-import { AddListForm } from "./add-list-form";
+import { AddListForm } from "../addlistform/add-list-form";
 import { updateCardOrder } from "@/actions/update-card-order-action";
 
 // switch order of two items in an array

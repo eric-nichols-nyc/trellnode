@@ -2,7 +2,7 @@
 
 import { TitleForm } from "@/components/form/title-form/title-form";
 import { updateBoard } from "@/actions/update-board-action";
-import { ListOptions } from "./list-options";
+import { ListOptions } from "../listoptions/list-options";
 import { ListWithCards } from "@/types";
 
 type ListHeaderProps = {
