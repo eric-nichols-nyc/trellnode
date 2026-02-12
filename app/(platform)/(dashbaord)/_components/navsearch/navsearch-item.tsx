@@ -19,11 +19,13 @@ export const NavsearchItem = ({ board }: NavSearchBarFormProps) => {
     <HoverCard>
     <Link href={`/boards/${board.id}`} className="cursor-pointer flex gap-1 bg-slate-200 w-full">
      {board.imageThumbUrl ? (
-      <Image src={board.imageThumbUrl} alt="board" width={32} height={32} />
+      <div className="m-1">
+        <Image src={board.imageThumbUrl} alt="board" width={24} height={24} />
+      </div>
     ) : (
       <div className="w-8 h-8 bg-muted rounded shrink-0" aria-hidden />
     )}
-  
+
       <HoverCardTrigger asChild>
         <Button variant="link">{board.title}</Button>
       </HoverCardTrigger>
@@ -47,7 +49,7 @@ export const NavsearchItem = ({ board }: NavSearchBarFormProps) => {
           </div>
         </div>
       </HoverCardContent>
-    
+
     </Link>
     </HoverCard>
   );

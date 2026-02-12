@@ -1,6 +1,6 @@
 import { Logo } from "@/components/shared/logo";
 import UserMenu from "./user-menu";
-import { NavSearch } from "./navsearch";
+import { NavSearch } from "./navsearch/navsearch";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, Bell } from "lucide-react";
@@ -16,8 +16,16 @@ export const Navbar = () => {
           <NavSearch />
         </div>
         <div className="flex justify-end items-center gap-2 shrink-0">
-          <Button variant="default" size="sm">
-              <Plus className="size-4" />
+          <Button
+            variant="default"
+            size="sm"
+            style={{
+              backgroundColor: "#FF7300", // dark orange
+              color: "white",
+              borderColor: "#d25d00"
+            }}
+            className="hover:bg-orange-700 focus:ring-orange-800"
+          >
               Create
           </Button>
           <Button variant="ghost" size="icon" aria-label="Notifications">
