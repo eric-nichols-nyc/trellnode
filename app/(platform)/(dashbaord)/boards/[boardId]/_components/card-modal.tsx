@@ -11,7 +11,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Card as PrismaCard } from "@prisma/client";
 import React, { ElementRef, useRef, useState } from "react";
-import { Pencil } from "lucide-react";
+import { Pencil, Plus, Calendar, CheckSquare, Paperclip, Check, Rocket, Zap, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,8 +38,17 @@ type CardWithList = PrismaCard & {
   completed?: boolean;
 };
 
+/** Signed-in user from DB (for comments display) */
+type CurrentUser = {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+} | null;
+
 type CardModalProps = {
   card: CardWithList;
+  currentUser?: CurrentUser;
   children?: React.ReactNode;
 };
 
@@ -86,13 +95,15 @@ function CardDetails({
   return (
     <div className="min-w-0 flex flex-col">
       <div className="flex items-start gap-3 mb-4">
-        <input
-          type="checkbox"
-          checked={completed}
-          onChange={(e) => onCompletedChange(e.target.checked)}
-          className="mt-1.5 h-4 w-4 rounded border-stone-300 text-stone-600 focus:ring-stone-400"
-          aria-label="Mark card complete"
-        />
+        <button
+          type="button"
+          onClick={() => onCompletedChange(!completed)}
+          className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 border-black bg-white hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-1"
+          aria-label={completed ? "Mark card incomplete" : "Mark card complete"}
+          aria-pressed={completed}
+        >
+          {completed && <Check className="size-3.5 stroke-[2.5] text-black" />}
+        </button>
         <div className="min-w-0 flex-1">
           {isEditing ? (
             <form onSubmit={onSubmit} ref={formRef}>
@@ -106,30 +117,72 @@ function CardDetails({
               />
             </form>
           ) : (
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={startEditing}
-                className="flex-1 min-w-0 text-left text-xl font-semibold rounded px-2 py-1 -mx-2 -my-1 hover:bg-black/5 min-h-[2rem]"
-              >
-                {title || "Add a title..."}
-              </button>
-              <button
-                type="button"
-                onClick={startEditing}
-                className="shrink-0 rounded p-1.5 text-gray-400 hover:bg-black/10 hover:text-gray-600"
-                aria-label="Edit title"
-              >
-                <Pencil className="size-4" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={startEditing}
+              className="w-full min-w-0 text-left text-xl font-semibold rounded px-2 py-1 -mx-2 -my-1 hover:bg-black/5 min-h-[2rem]"
+            >
+              {title || "Add a title..."}
+            </button>
           )}
         </div>
       </div>
+      <div className="mb-4 flex flex-wrap gap-1.5" role="group" aria-label="Card actions">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="text-stone-600 hover:text-stone-900"
+        >
+          <Plus className="size-4 mr-1.5" />
+          Add
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="text-stone-600 hover:text-stone-900"
+        >
+          <Calendar className="size-4 mr-1.5" />
+          Dates
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="text-stone-600 hover:text-stone-900"
+        >
+          <CheckSquare className="size-4 mr-1.5" />
+          Checklist
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="text-stone-600 hover:text-stone-900"
+        >
+          <Paperclip className="size-4 mr-1.5" />
+          Attachment
+        </Button>
+      </div>
       <div>
-        <p className="text-xs font-medium text-stone-500 uppercase tracking-wide mb-1.5">
-          Description
-        </p>
+        <div className="flex items-center justify-between gap-2 mb-1.5">
+          <p className="text-xs font-medium text-stone-500 uppercase tracking-wide">
+            Description
+          </p>
+          {hasDescription && !isEditingDescription && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="h-auto py-0.5 px-1.5 text-xs text-stone-600 hover:text-stone-900 -mr-1"
+              onClick={startEditingDescription}
+            >
+              <Pencil className="size-3 mr-1 inline" />
+              Edit
+            </Button>
+          )}
+        </div>
         {isEditingDescription ? (
           <>
             <TinyMCEEditor
@@ -160,22 +213,10 @@ function CardDetails({
             </Button>
           </>
         ) : hasDescription ? (
-          <>
-            <div
-              className="rounded-md border border-stone-200 bg-stone-50/50 p-3 text-sm text-stone-700 prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              className="mt-2 text-stone-600 hover:text-stone-900"
-              onClick={startEditingDescription}
-            >
-              <Pencil className="size-4 mr-1.5 inline" />
-              Edit
-            </Button>
-          </>
+          <div
+            className="rounded-md border border-stone-200 bg-stone-50/50 p-3 text-sm text-stone-700 prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         ) : (
           <Button
             type="button"
@@ -198,22 +239,215 @@ function CardDetails({
   );
 }
 
-/** Comments and activity section */
-function Comments() {
+type CardDetailTabId = "power-ups" | "automations" | "comments";
+
+function CardDetailTabs() {
+  const [activeTab, setActiveTab] = useState<CardDetailTabId>("comments");
+
+  const tabs: { id: CardDetailTabId; label: string; icon: React.ReactNode }[] = [
+    { id: "power-ups", label: "Power-ups", icon: <Rocket className="size-4" /> },
+    { id: "automations", label: "Automations", icon: <Zap className="size-4" /> },
+    { id: "comments", label: "Comments", icon: <MessageSquare className="size-4" /> },
+  ];
+
   return (
-    <div className="min-w-0 flex flex-col border-l border-stone-200 pl-4">
-      <h3 className="text-sm font-semibold text-stone-700 mb-3">
+    <div
+      className="inline-flex shrink-0 rounded-lg bg-stone-700 p-0.5"
+      role="tablist"
+      aria-label="Card details sections"
+    >
+      <div className="flex rounded-md">
+        {tabs.map((tab, index) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <div key={tab.id} className="flex items-center">
+              {index > 0 && (
+                <div className="h-5 w-px shrink-0 bg-stone-500" aria-hidden />
+              )}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 rounded px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "rounded-b-none bg-blue-600 text-white border-b-2 border-blue-400"
+                    : "text-stone-300 hover:bg-stone-600 hover:text-white"
+                }`}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+type CommentItem = { id: number; content: string };
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().slice(0, 2);
+  }
+  return (name.slice(0, 2) || "?").toUpperCase();
+}
+
+/** List of comments: 2 cols (initials | name + comment + edit/delete links) */
+function CommentList({
+  comments,
+  currentUser,
+  onEdit,
+  onDelete,
+}: {
+  comments: CommentItem[];
+  currentUser: CurrentUser;
+  onEdit: (id: number, content: string) => void;
+  onDelete: (id: number) => void;
+}) {
+  const displayName = currentUser?.name ?? "You";
+  const initials = currentUser ? getInitials(currentUser.name) : "Y";
+
+  if (comments.length === 0) return null;
+  return (
+    <ul className="space-y-3 mt-3">
+      {comments.map((comment) => (
+        <li key={comment.id} className="grid grid-cols-[auto_1fr] gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-200 text-xs font-medium text-stone-700">
+            {initials}
+          </div>
+          <div className="min-w-0 rounded-md bg-white border border-stone-200 p-2.5 shadow-sm">
+            <p className="text-sm font-medium text-stone-800">{displayName}</p>
+            <div
+              className="mt-0.5 text-sm text-stone-600 prose prose-sm max-w-none prose-p:my-0.5 prose-ul:my-0.5 prose-ol:my-0.5"
+              dangerouslySetInnerHTML={{ __html: comment.content }}
+            />
+            <div className="mt-1 flex gap-2">
+              <button
+                type="button"
+                onClick={() => onEdit(comment.id, comment.content)}
+                className="text-xs text-stone-500 underline hover:text-stone-700"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={() => onDelete(comment.id)}
+                className="text-xs text-stone-500 underline hover:text-stone-700"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Comments and activity section: button toggles rich text editor; comments are local state only */
+function Comments({ currentUser }: { currentUser: CurrentUser }) {
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [commentContent, setCommentContent] = useState("");
+  const [comments, setComments] = useState<CommentItem[]>([]);
+  const [nextId, setNextId] = useState(0);
+  const [editingId, setEditingId] = useState<number | null>(null);
+
+  const handleSave = () => {
+    const trimmed = commentContent.replace(/<[^>]*>/g, "").trim();
+    if (!trimmed) {
+      setIsEditorOpen(false);
+      setCommentContent("");
+      setEditingId(null);
+      return;
+    }
+    if (editingId !== null) {
+      setComments((prev) =>
+        prev.map((c) => (c.id === editingId ? { ...c, content: commentContent } : c))
+      );
+      setEditingId(null);
+      toast.success("Comment updated");
+    } else {
+      setComments((prev) => [...prev, { id: nextId, content: commentContent }]);
+      setNextId((n) => n + 1);
+      toast.success("Comment added");
+    }
+    setCommentContent("");
+    setIsEditorOpen(false);
+  };
+
+  const handleCancel = () => {
+    setCommentContent("");
+    setIsEditorOpen(false);
+    setEditingId(null);
+  };
+
+  const handleEdit = (id: number, content: string) => {
+    setCommentContent(content);
+    setEditingId(id);
+    setIsEditorOpen(true);
+  };
+
+  const handleDelete = (id: number) => {
+    setComments((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  return (
+    <div className="min-w-0 flex flex-col border-l border-stone-200 pl-4 rounded-r-lg bg-stone-100 py-3 pr-3">
+      <h3 className="text-sm font-semibold text-stone-700 mb-3 px-1">
         Comments and activity
       </h3>
-      <Textarea
-        placeholder="Write a comment"
-        className="bg-stone-50 border-stone-200 min-h-[80px] resize-y"
+      {!isEditorOpen ? (
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="w-full justify-start text-stone-500 hover:text-stone-700"
+          onClick={() => setIsEditorOpen(true)}
+        >
+          <Pencil className="size-4 mr-1.5" />
+          Write a comment
+        </Button>
+      ) : (
+        <div className="space-y-2">
+          <TinyMCEEditor
+            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+            value={commentContent}
+            onEditorChange={setCommentContent}
+            init={{
+              height: 120,
+              menubar: false,
+              plugins: ["lists", "link"],
+              toolbar: "undo redo | bold italic | bullist numlist | link",
+              content_style: "body { font-family: inherit; font-size: 14px; }",
+              placeholder: "Write a comment...",
+              entity_encoding: "raw",
+            }}
+          />
+          <div className="flex gap-2">
+            <Button type="button" size="sm" onClick={handleSave}>
+              {editingId !== null ? "Update" : "Save"}
+            </Button>
+            <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      )}
+      <CommentList
+        comments={comments}
+        currentUser={currentUser}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
       />
     </div>
   );
 }
 
-export function CardModal({ card, children }: CardModalProps) {
+export function CardModal({ card, currentUser = null, children }: CardModalProps) {
   const router = useRouter();
 
   // Title editing (inline)
@@ -246,6 +480,7 @@ export function CardModal({ card, children }: CardModalProps) {
     boardId: string;
     description?: string;
     completed?: boolean;
+    comment?: string;
   }) => {
     const result = await updateCard(payload);
     if (result && "success" in result && result.success) {
@@ -290,17 +525,9 @@ export function CardModal({ card, children }: CardModalProps) {
 
   const startEditingDescription = () => setIsEditingDescription(true);
 
-  const handleCompletedChange = async (newCompleted: boolean) => {
+  const handleCompletedChange = (newCompleted: boolean) => {
     setCompleted(newCompleted);
-    if (boardId) {
-      const ok = await runUpdateCard({
-        id: card.id,
-        title: (title || card.title || "").trim() || "Untitled",
-        boardId,
-        completed: newCompleted,
-      });
-      if (!ok) setCompleted(!newCompleted);
-    }
+    // Not persisted to database — local state only
   };
 
   /** Auto-save description when editor loses focus */
@@ -403,8 +630,8 @@ export function CardModal({ card, children }: CardModalProps) {
               ×
             </button>
           </CardHeader>
-          <CardContent className="p-4 h-[465px] overflow-y-auto">
-            <div className="grid grid-cols-[1fr_1fr] gap-4 h-full">
+          <CardContent className="p-4 h-[465px] overflow-y-auto flex flex-col">
+            <div className="grid grid-cols-[1fr_1fr] gap-4 flex-1 min-h-0">
               <div className="min-w-0 overflow-y-auto pr-4">
                 <CardDetails
                   title={title}
@@ -427,11 +654,14 @@ export function CardModal({ card, children }: CardModalProps) {
                   isSavingDescription={isSavingDescription}
                 />
               </div>
-              <Comments />
+              <Comments currentUser={currentUser} />
             </div>
             {children}
           </CardContent>
         </Card>
+        <div className="mt-4 flex justify-center">
+                <CardDetailTabs />
+              </div>
       </div>
     </>
   );

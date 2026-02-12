@@ -28,10 +28,33 @@ async function getCard(cardId: string) {
   }
 }
 
+async function getCurrentUser(userId: string) {
+  try {
+    await connectToDatabase();
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, name: true, email: true, image: true },
+    });
+    return user;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
 export default async function CardModalPage({ params }: PageProps) {
+  const session = await getServerSession(options);
+  if (!session?.user?.email) redirect("/");
+  const userId = (session.user as { id?: string }).id;
+  if (!userId) redirect("/");
+
   const { cardId } = await params;
-  const card = await getCard(cardId);
+  const [card, currentUser] = await Promise.all([
+    getCard(cardId),
+    getCurrentUser(userId),
+  ]);
+
   if (!card) notFound();
 
-  return <CardModal card={card} />;
+  return <CardModal card={card} currentUser={currentUser} />;
 }
