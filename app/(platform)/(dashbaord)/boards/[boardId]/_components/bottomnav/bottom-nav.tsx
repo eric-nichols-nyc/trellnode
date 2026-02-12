@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Inbox, Calendar, LayoutList, Layers } from "lucide-react";
-import { SwitchBoardsModal } from "./switch-boards-modal";
+import { SwitchBoardsModal } from "../switchboardsmodal/switch-boards-modal";
 
 const navItems = [
   { label: "Inbox", icon: Inbox, disabled: true },

@@ -1,5 +1,5 @@
 "use client";
-import { BoardDndList } from "./board-dnd-list";
+import { BoardDndList } from "../boarddndlist/board-dnd-list";
 import { startTransition, useEffect, useOptimistic } from "react";
 import { ListWithCards } from "@/types";
 import {
