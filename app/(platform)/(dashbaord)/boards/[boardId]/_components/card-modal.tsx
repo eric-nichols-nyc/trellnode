@@ -365,9 +365,9 @@ export function CardModal({ card, children }: CardModalProps) {
         onClick={handleClose}
         aria-hidden
       />
-      {/* Modal panel: shadcn Card, top-aligned, max-w-2xl */}
+      {/* Modal panel: shadcn Card, top-aligned */}
       <div
-        className="fixed left-1/2 top-8 z-50 w-full max-w-4xl -translate-x-1/2 max-h-[calc(100vh-4rem)] overflow-y-auto px-4"
+        className="fixed left-1/2 top-8 z-50 w-full max-w-6xl -translate-x-1/2 max-h-[calc(100vh-4rem)] overflow-y-auto px-4"
         role="dialog"
         aria-modal="true"
         aria-label="Card details"
