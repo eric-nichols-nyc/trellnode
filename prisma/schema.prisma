@@ -10,13 +10,14 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(cuid())
-  name           String
-  email          String    @unique
-  image          String?
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  image        String?
   hashedPassword String?
-  boards         Board[]
-  comments       Comment[]
+  boards       Board[]
+  comments     Comment[]
+  attachments  Attachment[]
 }
 
 model Board {
@@ -50,17 +51,52 @@ model List {
 }
 
 model Card {
+  id           String         @id @default(cuid())
+  title        String
+  description  String?
+  completed    Boolean        @default(false)
+  order        Int
+  imageUrl     String?
+  listId       String
+  list         List           @relation(fields: [listId], references: [id], onDelete: Cascade)
+  comments     Comment[]
+  attachments  Attachment[]
+  checklists   Checklist[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  cardId    String
+  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Checklist {
+  id    String         @id @default(cuid())
+  title String
+  order Int            @default(0)
+  cardId String
+  card   Card          @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  items ChecklistItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model ChecklistItem {
   id          String    @id @default(cuid())
   title       String
-  description String?
   completed   Boolean   @default(false)
-  order       Int
-  imageUrl    String?
-  listId      String
-  list        List      @relation(fields: [listId], references: [id], onDelete: Cascade)
-  comments    Comment[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  order       Int       @default(0)
+  checklistId String
+  checklist   Checklist @relation(fields: [checklistId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Comment {
