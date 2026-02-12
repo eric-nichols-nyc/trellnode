@@ -1,5 +1,5 @@
 "use client";
-import { BoardTitleForm } from "@/components/form/board-title-form";
+import { BoardTitleForm } from "@/app/(platform)/(dashbaord)/boards/[boardId]/_components/board-title-form/board-title-form";
 import React from "react";
 import { BoardOptions } from "../boardoptions/board-options";
 import { Board } from "@prisma/client";
