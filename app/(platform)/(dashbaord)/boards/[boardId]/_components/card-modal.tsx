@@ -32,7 +32,11 @@ const TinyMCEEditor = dynamic(
   { ssr: false }
 );
 
-type CardWithList = PrismaCard & { list?: { boardId: string }; description?: string | null };
+type CardWithList = PrismaCard & {
+  list?: { boardId: string };
+  description?: string | null;
+  completed?: boolean;
+};
 
 type CardModalProps = {
   card: CardWithList;
@@ -289,12 +293,13 @@ export function CardModal({ card, children }: CardModalProps) {
   const handleCompletedChange = async (newCompleted: boolean) => {
     setCompleted(newCompleted);
     if (boardId) {
-      await runUpdateCard({
+      const ok = await runUpdateCard({
         id: card.id,
-        title,
+        title: (title || card.title || "").trim() || "Untitled",
         boardId,
         completed: newCompleted,
       });
+      if (!ok) setCompleted(!newCompleted);
     }
   };
 

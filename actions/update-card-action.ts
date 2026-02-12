@@ -48,13 +48,12 @@ export async function updateCard(data: {
 
   try {
     await connectToDatabase();
+    const updateData: Record<string, unknown> = { title };
+    if (description !== undefined) updateData.description = description ?? null;
+    if (completed !== undefined) updateData.completed = completed;
     await prisma.card.update({
       where: { id },
-      data: {
-        title,
-        ...(description !== undefined && { description: description ?? null }),
-        ...(completed !== undefined && { completed }),
-      },
+      data: updateData as { title: string; description?: string | null; completed?: boolean },
     });
     if (comment !== undefined && comment.trim() !== "") {
       const user = await prisma.user.findUnique({
