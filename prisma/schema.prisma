@@ -37,10 +37,11 @@ model Board {
 }
 
 model List {
-  id        String   @id @default(cuid())
-  title     String
-  order     Int
-  boardId   String
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  boardId     String
   board     Board   @relation(fields: [boardId], references: [id], onDelete: Cascade)
   cards     Card[]
   createdAt DateTime @default(now())
@@ -48,11 +49,13 @@ model List {
 }
 
 model Card {
-  id        String   @id @default(cuid())
-  title     String
-  order     Int
-  imageUrl  String?
-  listId    String
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  order       Int
+  imageUrl    String?
+  listId      String
   list      List    @relation(fields: [listId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

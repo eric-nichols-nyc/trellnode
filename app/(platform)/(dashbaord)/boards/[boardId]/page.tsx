@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getBoardById } from "./_lib/get-board";
 import { BoardView } from "./_components/board-view";
 
@@ -9,7 +10,7 @@ const BoardIdPage = async ({ params }: BoardIdPageProps) => {
   const { boardId } = await params;
   const board = await getBoardById(boardId);
   if (!board) {
-    return <p>Sorry not found</p>;
+    notFound();
   }
   return <BoardView board={board} />;
 };

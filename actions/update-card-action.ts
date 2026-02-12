@@ -15,12 +15,14 @@ const UpdateCardSchema = z.object({
     .max(500, "Title is too long"),
   id: z.string(),
   boardId: z.string(),
+  description: z.string().optional(),
 });
 
 export async function updateCard(data: {
   title: string;
   id: string;
   boardId: string;
+  description?: string;
 }) {
   const session = await getServerSession(options);
   if (!session?.user) {
@@ -29,21 +31,32 @@ export async function updateCard(data: {
 
   const validation = UpdateCardSchema.safeParse(data);
   if (!validation.success) {
-    return { errors: validation.error.flatten().fieldErrors };
+    const fieldErrors = validation.error.flatten().fieldErrors;
+    const firstError = Object.values(fieldErrors).flat()[0];
+    return {
+      success: false,
+      errors: fieldErrors,
+      message: firstError ?? "Invalid card data",
+    };
   }
 
-  const { title, id, boardId } = validation.data;
+  const { title, id, boardId, description } = validation.data;
 
   try {
     await connectToDatabase();
     await prisma.card.update({
       where: { id },
-      data: { title },
+      data: {
+        title,
+        ...(description !== undefined && { description: description ?? null }),
+      },
     });
     revalidatePath(`/boards/${boardId}`);
     return { success: true };
   } catch (e) {
-    console.error(e);
-    return { message: "Unable to update card" };
+    console.error("updateCard error:", e);
+    const message =
+      e instanceof Error ? e.message : "Unable to update card. Please try again.";
+    return { success: false, message };
   }
 }
