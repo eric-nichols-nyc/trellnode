@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 import { Board } from "@prisma/client";
 import { prisma } from "@/prisma";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import {BoardDndListItem} from "./list-item";
+import {BoardDndListItem} from "../board-list-item/list-item";
 import { ClipboardList } from "lucide-react";
 import Link from "next/link";
-import { CreateBoardNavButton } from "./create-board-nav-button";
+import { CreateBoardNavButton } from "../create-board-nav-button/create-board-nav-button";
 
 export const BoardListNav = async () => {
   const session = await getServerSession(options);

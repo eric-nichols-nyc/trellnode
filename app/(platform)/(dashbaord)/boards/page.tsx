@@ -6,7 +6,7 @@ import { AllBoardsList } from "./[boardId]/_components/boardlist/board-list";
 import { User, Board } from "@prisma/client";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { Logo } from "@/components/shared/logo";
-import { BoardListNav } from "../_components/board-list-nav";
+import { BoardListNav } from "../_components/board-list-nav/board-list-nav";
 import { Sidenav } from "../_components/sidenav/sidenav";
 
 const Boardspage = async () => {
