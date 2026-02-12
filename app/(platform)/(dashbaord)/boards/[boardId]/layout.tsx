@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import TProvider from "@/components/providers/theme-provider";
+import { BottomNav } from "./_components/bottom-nav";
+
 export const metadata: Metadata = {
   title: "Trellnode App",
 };
@@ -18,6 +20,8 @@ export default function BoardsIdLayout({
           <TProvider>
             {children}
             {modal}
+            <BottomNav />
+
           </TProvider>
         </main>
       </div>

@@ -40,7 +40,6 @@ const Boardspage = async () => {
 
   return (
     <div className="boards-page-container w-full flex justify-center">
-      <Sidenav><BoardListNav /></Sidenav>
       <div className="all-boards flex flex-col w-full max-w-4xl">
         <div className="flex items-center justify-center font-semibold h-[124px]">
           <div className="w-full px-3 flex gap-2 items-center">

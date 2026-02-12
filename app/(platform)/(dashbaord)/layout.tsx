@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sidenav } from "./_components/sidenav";
+
 export const metadata: Metadata = {
   title: "Trellnode App",
 };

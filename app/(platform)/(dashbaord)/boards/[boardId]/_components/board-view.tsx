@@ -2,7 +2,6 @@ import { Board } from "@prisma/client";
 import BoardHeader from "./board-header";
 import { BoardDndLists } from "./board-lists";
 import { BoardListNav } from "../../../_components/board-list-nav";
-import { Sidenav } from "../../../_components/sidenav";
 
 type BoardViewProps = {
   board: Board;
@@ -30,14 +29,6 @@ export function BoardView({ board }: BoardViewProps) {
         color: theme === "light" ? "black" : "white",
       }}
     >
-      <div
-        style={{ backgroundColor: getPrimaryColor() }}
-        className="opacity-90 shrink-0"
-      >
-        <Sidenav>
-          <BoardListNav />
-        </Sidenav>
-      </div>
       <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
         <BoardHeader board={board} />
         <div className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden">
