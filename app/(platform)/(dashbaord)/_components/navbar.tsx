@@ -1,5 +1,5 @@
 import { Logo } from "@/components/shared/logo";
-import UserMenu from "./user-menu";
+import UserMenu from "./usermenu/user-menu";
 import { NavSearch } from "./navsearch/navsearch";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

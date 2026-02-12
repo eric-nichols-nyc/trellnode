@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBoardById } from "./_lib/get-board";
-import { BoardView } from "./_components/board-view";
+import { BoardView } from "./_components/boardview/board-view";
 
 type BoardIdPageProps = {
   params: Promise<{ boardId: string }>;

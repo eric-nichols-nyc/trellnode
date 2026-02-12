@@ -1,7 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/shared/logo";
-import { CollapsibleNav } from "./collapsible-nav";
+import { CollapsibleNav } from "../collapsible-nav";
 import { useMediaQuery } from "usehooks-ts";
 
 export const Sidenav = ({ children }: { children: React.ReactNode }) => {

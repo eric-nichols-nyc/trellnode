@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect, notFound } from "next/navigation";
 import { getBoardById } from "../../_lib/get-board";
-import { BoardView } from "../../_components/board-view";
+import { BoardView } from "../../_components/boardview/board-view";
 
 type PageProps = {
   params: Promise<{ cardId: string }>;

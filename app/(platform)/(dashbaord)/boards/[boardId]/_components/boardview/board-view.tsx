@@ -1,6 +1,6 @@
 import { Board } from "@prisma/client";
-import BoardHeader from "./board-header";
-import { BoardDndLists } from "./board-lists";
+import BoardHeader from "../board-header";
+import { BoardDndLists } from "../board-lists";
 
 type BoardViewProps = {
   board: Board;
