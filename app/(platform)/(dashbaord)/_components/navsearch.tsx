@@ -40,7 +40,7 @@ async function getBoards() {
 export const NavSearch = async () => {
   const boards = await getBoards();
   return (
-    <div>
+    <div className="w-full">
       <NavSearchBarForm boards={boards} />
     </div>
   );

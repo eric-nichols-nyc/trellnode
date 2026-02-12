@@ -9,14 +9,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IconSize } from "@/constants";
-import { RxAvatar } from "react-icons/rx";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { deleteAccount } from "@/actions/delete-account-action";
 
+function getInitials(name: string | null | undefined): string {
+  if (!name || !name.trim()) return "?";
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase().slice(0, 2);
+  }
+  return name.slice(0, 2).toUpperCase();
+}
+
 const UserMenu = () => {
   const { data: session } = useSession();
+  const initials = getInitials(session?.user?.name ?? undefined);
 
   const handleDeleteAccount = async () => {
     if (
@@ -38,13 +47,18 @@ const UserMenu = () => {
     <div className="flex">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div>
-            <RxAvatar
-              className="cursor-pointer"
-              size={IconSize}
-              color="black"
-            />
-          </div>
+          <button
+            type="button"
+            className="rounded-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            aria-label="User menu"
+          >
+            <Avatar className="h-9 w-9 cursor-pointer">
+              <AvatarImage src={session?.user?.image ?? undefined} alt="" />
+              <AvatarFallback className="bg-stone-200 text-stone-700 text-sm font-medium">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
+          </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           {session?.user?.name && (
