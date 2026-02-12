@@ -159,7 +159,7 @@ export function CardModal({ card, children }: CardModalProps) {
         aria-hidden
       />
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-4 text-black shadow-xl"
+        className="fixed left-1/2 top-8 z-50 w-full max-w-lg -translate-x-1/2 rounded-lg bg-white p-4 text-black shadow-xl max-h-[calc(100vh-4rem)] overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-label="Card details"
