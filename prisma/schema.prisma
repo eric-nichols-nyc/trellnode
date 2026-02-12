@@ -57,6 +57,10 @@ model Card {
   completed    Boolean        @default(false)
   order        Int
   imageUrl     String?
+  cover        String?
+  due          DateTime?
+  dueComplete  DateTime?
+  dueReminder  DateTime?
   listId       String
   list         List           @relation(fields: [listId], references: [id], onDelete: Cascade)
   comments     Comment[]
