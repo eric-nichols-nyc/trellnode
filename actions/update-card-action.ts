@@ -16,6 +16,8 @@ const UpdateCardSchema = z.object({
   id: z.string(),
   boardId: z.string(),
   description: z.string().optional(),
+  completed: z.boolean().optional(),
+  comment: z.string().optional(),
 });
 
 export async function updateCard(data: {
@@ -23,6 +25,8 @@ export async function updateCard(data: {
   id: string;
   boardId: string;
   description?: string;
+  completed?: boolean;
+  comment?: string;
 }) {
   const session = await getServerSession(options);
   if (!session?.user) {
@@ -40,7 +44,7 @@ export async function updateCard(data: {
     };
   }
 
-  const { title, id, boardId, description } = validation.data;
+  const { title, id, boardId, description, completed, comment } = validation.data;
 
   try {
     await connectToDatabase();
@@ -49,8 +53,23 @@ export async function updateCard(data: {
       data: {
         title,
         ...(description !== undefined && { description: description ?? null }),
+        ...(completed !== undefined && { completed }),
       },
     });
+    if (comment !== undefined && comment.trim() !== "") {
+      const user = await prisma.user.findUnique({
+        where: { email: session.user.email ?? undefined },
+      });
+      if (user) {
+        await (prisma as any).comment.create({
+          data: {
+            content: comment.trim(),
+            cardId: id,
+            userId: user.id,
+          },
+        });
+      }
+    }
     revalidatePath(`/boards/${boardId}`);
     return { success: true };
   } catch (e) {
